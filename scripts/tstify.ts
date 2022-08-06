@@ -1,9 +1,10 @@
 import { argv } from 'process';
-import path from 'path';
+import { join } from 'path';
 import { readdirSync, rename } from 'fs';
-
-// [...nm.split('.')].slice(0, -1).join('.') + '.ts'
-
+/**
+ * This script converts all '.js' files in a defined directory to '.ts'
+ * @argument --path <path to directory>
+ */
 (async () => {
   // index of type argument
   const pathIdx = argv.indexOf('--path');
@@ -17,7 +18,7 @@ import { readdirSync, rename } from 'fs';
 
   const pathVal = argv[pathIdx + 1];
 
-  const targetPath = path.join(__dirname, '../', pathVal);
+  const targetPath = join(__dirname, '../', pathVal);
 
   // Get an array of the files inside the folder
   const files = readdirSync(targetPath);

@@ -13,7 +13,7 @@
     "server:test": "cross-env NODE_ENV=test nodemon",
     "server:prod": "cross-env NODE_ENV=production nodemon",
     "start": "node index.js",
-    "build": "npx tsc",
+    "build": "tsc",
     "lint:check": "eslint ./**/*.{js,jsx,ts,tsx} --max-warnings=0",
     "lint:fix": "eslint ./**/*.{js,jsx,ts,tsx} --fix",
     "prepare": "husky install"

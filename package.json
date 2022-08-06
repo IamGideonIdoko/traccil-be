@@ -10,6 +10,7 @@
     "test": "jest",
     "test:coverage": "jest --coverage",
     "server:dev": "cross-env NODE_ENV=development nodemon",
+    "server:test": "cross-env NODE_ENV=test nodemon",
     "server:prod": "cross-env NODE_ENV=production nodemon",
     "start": "node index.js",
     "build": "npx tsc",

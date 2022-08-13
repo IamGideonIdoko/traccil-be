@@ -16,7 +16,10 @@
     "build": "tsc",
     "lint:check": "eslint ./**/*.{js,jsx,ts,tsx} --max-warnings=0",
     "lint:fix": "eslint ./**/*.{js,jsx,ts,tsx} --fix",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "tstify:models": "ts-node scripts/tstify.ts --path src/db/models",
+    "tstify:migrations": "ts-node scripts/tstify.ts --path src/db/migrations",
+    "tstify:seeders": "ts-node scripts/tstify.ts --path src/db/seeders"
   },
   "author": "OgaRepair Team",
   "license": "MIT",

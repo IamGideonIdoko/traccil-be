@@ -1,0 +1,26 @@
+{
+  "development": {
+    "username": "DEV_DB_USERNAME",
+    "password": "DEV_DB_PASSWORD",
+    "database": "DEV_DB_DATABASE",
+    "host": "DEV_DB_HOST",
+    "dialect": "DEV_DB_CONNECTION",
+    "use_json_env": true
+  },
+  "test": {
+    "username": "TEST_DB_USERNAME",
+    "password": "TEST_DB_PASSWORD",
+    "database": "TEST_DB_DATABASE",
+    "host": "TEST_DB_HOST",
+    "dialect": "TEST_DB_CONNECTION",
+    "use_json_env": true
+  },
+  "production": {
+    "username": "PROD_DB_USERNAME",
+    "password": "PROD_DB_PASSWORD",
+    "database": "PROD_DB_DATABASE",
+    "host": "PROD_DB_HOST",
+    "dialect": "PROD_DB_CONNECTION",
+    "use_json_env": true
+  }
+}

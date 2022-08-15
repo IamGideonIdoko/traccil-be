@@ -9,6 +9,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import limiter from './config/limiter.config';
 import appCors from './config/cors.config';
+import getApolloServer from './graphql/index';
 
 config();
 
@@ -50,6 +51,10 @@ config();
   });
 
   const httpServer = createServer(app);
+  const apolloServer = getApolloServer(httpServer);
+  await apolloServer.start();
+  apolloServer.applyMiddleware({ app, path: '/api/graphql' });
   await new Promise<void>((resolve) => httpServer.listen({ port: envConfig.port }, resolve));
   console.log(`🚀 HTTP Server ready at http://localhost:${envConfig.port}`);
+  console.log(`🚀 GraphQL Server ready at http://localhost:${envConfig.port}${apolloServer.graphqlPath}`);
 })();

@@ -19,13 +19,15 @@
     "prepare": "husky install",
     "tstify:models": "ts-node scripts/tstify.ts --path src/db/models",
     "tstify:migrations": "ts-node scripts/tstify.ts --path src/db/migrations",
-    "tstify:seeders": "ts-node scripts/tstify.ts --path src/db/seeders"
+    "tstify:seeders": "ts-node scripts/tstify.ts --path src/db/seeders",
+    "generate:graphql-types": "graphql-codegen"
   },
   "author": "OgaRepair Team",
   "license": "MIT",
   "dependencies": {
+    "@graphql-tools/graphql-file-loader": "^7.5.2",
+    "@graphql-tools/load": "^7.7.4",
     "@graphql-tools/schema": "^8.5.1",
-    "@types/morgan": "^1.9.3",
     "apollo-server-express": "^3.10.0",
     "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
@@ -39,6 +41,7 @@
     "express-rate-limit": "^6.5.1",
     "express-validator": "^6.14.2",
     "graphql": "^16.5.0",
+    "graphql-scalars": "^1.18.0",
     "helmet": "^5.1.1",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
@@ -49,6 +52,9 @@
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^2.11.6",
+    "@graphql-codegen/typescript": "^2.7.3",
+    "@graphql-codegen/typescript-resolvers": "^2.7.3",
     "@types/bcryptjs": "^2.4.2",
     "@types/compression": "^1.7.2",
     "@types/cookie-parser": "^1.4.3",
@@ -56,6 +62,7 @@
     "@types/express": "^4.17.13",
     "@types/jest": "^28.1.6",
     "@types/jsonwebtoken": "^8.5.8",
+    "@types/morgan": "^1.9.3",
     "@types/node": "^18.6.4",
     "@typescript-eslint/eslint-plugin": "^5.32.0",
     "@typescript-eslint/parser": "^5.32.0",

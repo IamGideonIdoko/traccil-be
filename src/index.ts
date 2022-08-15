@@ -45,8 +45,7 @@ config();
   // Routes
   app.get('/', (_req: Request, res: Response) => {
     res.status(200).json({
-      name: 'OgaRepair Core Backend',
-      description: 'Core service for OgaRepair',
+      service: 'OgaRepair Core Backend',
     });
   });
 

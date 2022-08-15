@@ -20,7 +20,7 @@
     "tstify:models": "ts-node scripts/tstify.ts --path src/db/models",
     "tstify:migrations": "ts-node scripts/tstify.ts --path src/db/migrations",
     "tstify:seeders": "ts-node scripts/tstify.ts --path src/db/seeders",
-    "generate:graphql-types": "graphql-codegen"
+    "generate:types": "graphql-codegen"
   },
   "author": "OgaRepair Team",
   "license": "MIT",

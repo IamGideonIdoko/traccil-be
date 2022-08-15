@@ -1,7 +1,8 @@
 import { userQueries, userMutations, userFields } from './user';
 import { bookQueries, bookMutations, bookFields } from './book';
+import { Resolvers } from '../generated-types';
 
-const resolvers = {
+const resolvers: Resolvers = {
   /** All query resolvers go in here */
   Query: {
     ...userQueries,
@@ -12,7 +13,7 @@ const resolvers = {
     ...userMutations,
     ...bookMutations,
   },
-  /** All fields resolvers go in here */
+  /** All field resolvers go in here */
   ...userFields,
   ...bookFields,
 };

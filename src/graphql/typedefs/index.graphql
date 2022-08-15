@@ -7,3 +7,18 @@ type Query {
   book(id: ID!): Book
   books: [Book]
 }
+
+type Mutation {
+  # User
+  addUser(
+    name: String
+    age: Int
+  ): User
+
+  # Book
+  addBook(
+    name: String
+    genre: String
+    userId: String
+  ): Book
+}

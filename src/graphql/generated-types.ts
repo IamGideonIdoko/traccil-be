@@ -1,4 +1,5 @@
 import { GraphQLResolveInfo } from 'graphql';
+import { UserModel, BookModel } from './models';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -136,26 +137,26 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
-  Book: ResolverTypeWrapper<Book>;
+  Book: ResolverTypeWrapper<BookModel>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
   ID: ResolverTypeWrapper<Scalars['ID']>;
   Int: ResolverTypeWrapper<Scalars['Int']>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   String: ResolverTypeWrapper<Scalars['String']>;
-  User: ResolverTypeWrapper<User>;
+  User: ResolverTypeWrapper<UserModel>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
-  Book: Book;
+  Book: BookModel;
   Boolean: Scalars['Boolean'];
   ID: Scalars['ID'];
   Int: Scalars['Int'];
   Mutation: {};
   Query: {};
   String: Scalars['String'];
-  User: User;
+  User: UserModel;
 };
 
 export type BookResolvers<ContextType = any, ParentType extends ResolversParentTypes['Book'] = ResolversParentTypes['Book']> = {

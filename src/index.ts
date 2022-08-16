@@ -35,7 +35,12 @@ config();
   app.use(cookieParser());
 
   // add secure http headers
-  app.use(helmet());
+  app.use(
+    helmet({
+      crossOriginEmbedderPolicy: !envConfig.isDevelopment,
+      contentSecurityPolicy: !envConfig.isDevelopment,
+    }),
+  );
 
   // register rate limiter
   app.use(limiter());
@@ -56,5 +61,5 @@ config();
   apolloServer.applyMiddleware({ app, path: '/api/graphql' });
   await new Promise<void>((resolve) => httpServer.listen({ port: envConfig.port }, resolve));
   console.log(`🚀 HTTP Server ready at http://localhost:${envConfig.port}`);
-  console.log(`🚀 GraphQL Server ready at http://localhost:${envConfig.port}${apolloServer.graphqlPath}`);
+  console.log(`💹🚀 GraphQL Server ready at http://localhost:${envConfig.port}${apolloServer.graphqlPath}`);
 })();

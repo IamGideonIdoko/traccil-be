@@ -14,8 +14,12 @@ const resolvers: Resolvers = {
     ...bookMutations,
   },
   /** All field resolvers go in here */
-  ...userFields,
-  ...bookFields,
+  User: {
+    ...userFields,
+  },
+  Book: {
+    ...bookFields,
+  },
 };
 
 export default resolvers;

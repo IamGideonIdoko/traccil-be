@@ -19,7 +19,7 @@ export type Book = {
   genre?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
-  user: User;
+  user?: Maybe<User>;
 };
 
 export type Mutation = {
@@ -62,7 +62,7 @@ export type QueryUserArgs = {
 export type User = {
   __typename?: 'User';
   age?: Maybe<Scalars['Int']>;
-  books: Array<Maybe<Book>>;
+  books?: Maybe<Array<Book>>;
   id: Scalars['ID'];
   name?: Maybe<Scalars['String']>;
 };
@@ -162,7 +162,7 @@ export type BookResolvers<ContextType = any, ParentType extends ResolversParentT
   genre?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  user?: Resolver<ResolversTypes['User'], ParentType, ContextType>;
+  user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -180,7 +180,7 @@ export type QueryResolvers<ContextType = any, ParentType extends ResolversParent
 
 export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   age?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
-  books?: Resolver<Array<Maybe<ResolversTypes['Book']>>, ParentType, ContextType>;
+  books?: Resolver<Maybe<Array<ResolversTypes['Book']>>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;

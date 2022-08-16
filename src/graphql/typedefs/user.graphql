@@ -2,5 +2,5 @@ type User {
   id: ID!
   name: String
   age: Int
-  books: [Book]!
+  books: [Book!]
 }

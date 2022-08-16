@@ -3,7 +3,7 @@ import { makeExecutableSchema } from '@graphql-tools/schema';
 import resolvers from './resolvers';
 import { loadSchemaSync } from '@graphql-tools/load';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
-import { printSchema } from 'graphql';
+// import { printSchema } from 'graphql';
 
 const gqlFilesPath = join(__dirname, './typedefs');
 
@@ -12,7 +12,7 @@ const typeDefs = /* GraphQL */ loadSchemaSync(`${gqlFilesPath}/**/*.graphql`, {
 });
 
 // log schema to test
-console.log(printSchema(typeDefs));
+// console.log(printSchema(typeDefs));
 
 const schema = makeExecutableSchema({
   typeDefs,

@@ -46,3 +46,7 @@ export const getBookByIds = (ids: string[]) => {
 export const getUserByIds = (ids: string[]) => {
   return ids.map((id) => getUserById(id)) as UserModel[];
 };
+
+export const getBooksByUserIds = (ids: string[]) => {
+  return ids.map((id) => getBooksByUserId(id)) as BookModel[][];
+};

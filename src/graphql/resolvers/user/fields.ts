@@ -1,9 +1,8 @@
 import { UserResolvers } from '../../generated-types';
-import { getBooksByUserId } from '../data';
 
 const userFields: UserResolvers = {
-  books: async ({ id }) => {
-    return getBooksByUserId(id);
+  books: async ({ id }, _, { loaders }) => {
+    return loaders.book.one_by_author(id);
   },
 };
 

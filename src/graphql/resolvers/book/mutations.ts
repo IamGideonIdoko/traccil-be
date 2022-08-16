@@ -1,9 +1,9 @@
-import { uuid } from 'uuidv4';
+import { v4 as uuid } from 'uuid';
 import { MutationResolvers } from '../../generated-types';
 import { books } from '../data';
 
 const bookMutations: MutationResolvers = {
-  addBook: async (_, { name, genre, userId }) => {
+  addBook: async (_, { name, genre, userId }, { loaders }) => {
     const newBook = {
       id: uuid(),
       name: name || 'undefined',
@@ -11,7 +11,7 @@ const bookMutations: MutationResolvers = {
       userId: userId || 'undefined',
     };
     books.push(newBook);
-    return newBook;
+    return loaders.book.one(newBook.id);
   },
 };
 

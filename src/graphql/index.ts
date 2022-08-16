@@ -3,6 +3,7 @@ import { ApolloServerPluginDrainHttpServer, ApolloServerPluginLandingPageLocalDe
 import schema from './schema';
 import context from './context';
 import { createServer } from 'http';
+import depthLimit from 'graphql-depth-limit';
 
 const getApolloServer = (httpServer: ReturnType<typeof createServer>) => {
   const apolloServer = new ApolloServer({
@@ -14,6 +15,7 @@ const getApolloServer = (httpServer: ReturnType<typeof createServer>) => {
       ApolloServerPluginDrainHttpServer({ httpServer }),
       ApolloServerPluginLandingPageLocalDefault({ embed: true }),
     ],
+    validationRules: [depthLimit(5)],
   });
   return apolloServer;
 };

@@ -113,6 +113,7 @@ By default, the project is configured to connect to a MySQL database using [Pris
 6. Do not alter any configuration files without contacting team members.
 7. Do not install or manage any dependency with `npm` use `yarn` instead.
 8. Write meaningful commit messages.
+9. Do not push changes directly to the master branch. Push to remote branch of your local branch instead.
 
 ## Useful Tips
 

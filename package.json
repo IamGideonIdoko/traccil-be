@@ -57,6 +57,7 @@
     "@graphql-codegen/cli": "^2.11.6",
     "@graphql-codegen/typescript": "^2.7.3",
     "@graphql-codegen/typescript-resolvers": "^2.7.3",
+    "@prisma-korea/graphql-schema-generator": "^0.3.0",
     "@types/bcryptjs": "^2.4.2",
     "@types/compression": "^1.7.2",
     "@types/cookie-parser": "^1.4.3",

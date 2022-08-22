@@ -1,5 +1,7 @@
 // Prisma Schema
 // Documentation: https://pris.ly/d/prisma-schema
+
+// GENERATORS
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,17 +16,23 @@ generator graphql {
   output = "./graphql"
 }
 
+generator erd {
+  provider = "prisma-erd-generator"
+  output = "./diagrams/ERD-auto.svg"
+}
 
 datasource db {
   provider = "mysql"
   url      = env("DB_CONNECTION_URL")
 }
 
+// ENUMS
 enum Gender {
   MALE
   FEMALE
 }
 
+// MODELS
 model Client {
   id            String   @id @default(uuid())
   name          String

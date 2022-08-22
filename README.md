@@ -71,6 +71,12 @@ This is the core backend service for OgaRepair.
     * Starts a server running at http://localhost:8080
     * Automatically restarts when any of your files change
 
+* Run documentation server for generated Prisma docs:
+
+    ```bash
+    yarn server:docs
+    ```
+
 ## Databases
 
 By default, the project is configured to connect to a MySQL database using [Prisma](https://prima.io). The ERD for this project's database is given below:

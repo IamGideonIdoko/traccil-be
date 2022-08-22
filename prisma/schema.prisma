@@ -67,7 +67,7 @@ model ClientLocation {
   client    Client    @relation(fields: [clientId], references: [id])
 }
 
-model Workman {
+model Worker {
   id            String   @id @default(uuid())
   name          String
   email         String   @unique
@@ -83,19 +83,19 @@ model Workman {
   dob           DateTime?
   bio           String?
   verified      Boolean? @default(false)
-  location      WorkmanLocation?
-  services      WorkmanService[]
+  location      WorkerLocation?
+  services      WorkerService[]
   work          Work[]
 }
 
-model WorkmanLocation {
+model WorkerLocation {
   id        String    @id @default(uuid())
   longitude Float
   latitude  Float
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
-  workmanId String    @unique
-  workman   Workman   @relation(fields: [workmanId], references: [id])
+  workerId  String    @unique
+  worker    Worker   @relation(fields: [workerId], references: [id])
 }
 
 model Admin {
@@ -107,23 +107,23 @@ model Admin {
 }
 
 // Linking Model between Service and Category
-model WorkmanService {
-  workman      Workman  @relation(fields: [workmanId], references: [id])
-  workmanId    String
-  service      Service  @relation(fields: [serviceId], references: [id])
-  serviceId    String 
+model WorkerService {
+  worker      Worker  @relation(fields: [workerId], references: [id])
+  workerId    String
+  service     Service  @relation(fields: [serviceId], references: [id])
+  serviceId   String 
   
-  @@id([workmanId, serviceId])
+  @@id([workerId, serviceId])
 }
 
-// Services (has many - to - many relation with Category and Workman)
+// Services (has many - to - many relation with Category and Worker)
 model Service {
   id               String              @id
   title            String              @db.VarChar(255) @unique
   description      String?
   createdAt        DateTime            @default(now())
   categories       ServiceCategory[]
-  workmen          WorkmanService[]
+  workmen          WorkerService[]
   work             Work[]
 }
 
@@ -151,8 +151,8 @@ model Work {
   createdAt     DateTime          @default(now())
   client        Client            @relation(fields: [clientId], references: [id])
   clientId      String 
-  workman       Workman           @relation(fields: [workmanId], references: [id])
-  workmanId     String
+  worker        Worker           @relation(fields: [workerId], references: [id])
+  workerId      String
   service       Service           @relation(fields: [serviceId], references: [id])
   serviceId     String
   location      WorkLocation?

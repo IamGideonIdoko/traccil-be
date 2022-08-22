@@ -11,14 +11,14 @@ type Query {
   clients: [Client!]!
   clientlocation(id: ID!): ClientLocation
   clientlocations: [ClientLocation!]!
-  workman(id: ID!): Workman
-  workmans: [Workman!]!
-  workmanlocation(id: ID!): WorkmanLocation
-  workmanlocations: [WorkmanLocation!]!
+  worker(id: ID!): Worker
+  workers: [Worker!]!
+  workerlocation(id: ID!): WorkerLocation
+  workerlocations: [WorkerLocation!]!
   admin(id: ID!): Admin
   admins: [Admin!]!
-  workmanservice(id: ID!): WorkmanService
-  workmanservices: [WorkmanService!]!
+  workerservice(id: ID!): WorkerService
+  workerservices: [WorkerService!]!
   service(id: ID!): Service
   services: [Service!]!
   category(id: ID!): Category
@@ -85,7 +85,7 @@ input ClientLocationUpdateInput {
   client: Client
 }
 
-input WorkmanCreateInput {
+input WorkerCreateInput {
   name: String!
   email: String!
   password: String!
@@ -100,12 +100,12 @@ input WorkmanCreateInput {
   dob: DateTime
   bio: String
   verified: Boolean
-  location: WorkmanLocation
-  services: [WorkmanService!]!
+  location: WorkerLocation
+  services: [WorkerService!]!
   work: [Work!]!
 }
 
-input WorkmanUpdateInput {
+input WorkerUpdateInput {
   name: String
   email: String
   password: String
@@ -120,25 +120,25 @@ input WorkmanUpdateInput {
   dob: DateTime
   bio: String
   verified: Boolean
-  location: WorkmanLocation
-  services: [WorkmanService!]
+  location: WorkerLocation
+  services: [WorkerService!]
   work: [Work!]
 }
 
-input WorkmanLocationCreateInput {
+input WorkerLocationCreateInput {
   longitude: Float!
   latitude: Float!
   createdAt: DateTime!
   updatedAt: DateTime!
-  workman: Workman!
+  worker: Worker!
 }
 
-input WorkmanLocationUpdateInput {
+input WorkerLocationUpdateInput {
   longitude: Float
   latitude: Float
   createdAt: DateTime
   updatedAt: DateTime
-  workman: Workman
+  worker: Worker
 }
 
 input AdminCreateInput {
@@ -155,13 +155,13 @@ input AdminUpdateInput {
   joinedDate: DateTime
 }
 
-input WorkmanServiceCreateInput {
-  workman: Workman!
+input WorkerServiceCreateInput {
+  worker: Worker!
   service: Service!
 }
 
-input WorkmanServiceUpdateInput {
-  workman: Workman
+input WorkerServiceUpdateInput {
+  worker: Worker
   service: Service
 }
 
@@ -170,7 +170,7 @@ input ServiceCreateInput {
   description: String
   createdAt: DateTime!
   categories: [ServiceCategory!]!
-  workmen: [WorkmanService!]!
+  workmen: [WorkerService!]!
   work: [Work!]!
 }
 
@@ -179,7 +179,7 @@ input ServiceUpdateInput {
   description: String
   createdAt: DateTime
   categories: [ServiceCategory!]
-  workmen: [WorkmanService!]
+  workmen: [WorkerService!]
   work: [Work!]
 }
 
@@ -210,7 +210,7 @@ input ServiceCategoryUpdateInput {
 input WorkCreateInput {
   createdAt: DateTime!
   client: Client!
-  workman: Workman!
+  worker: Worker!
   service: Service!
   location: WorkLocation
   requestTime: DateTime!
@@ -222,7 +222,7 @@ input WorkCreateInput {
 input WorkUpdateInput {
   createdAt: DateTime
   client: Client
-  workman: Workman
+  worker: Worker
   service: Service
   location: WorkLocation
   requestTime: DateTime
@@ -254,18 +254,18 @@ type Mutation {
   createClientLocation(clientlocation: ClientLocationCreateInput!): ClientLocation
   updateClientLocation(clientlocation: ClientLocationUpdateInput!): ClientLocation
   deleteClientLocation(id: ID!): ClientLocation
-  createWorkman(workman: WorkmanCreateInput!): Workman
-  updateWorkman(workman: WorkmanUpdateInput!): Workman
-  deleteWorkman(id: ID!): Workman
-  createWorkmanLocation(workmanlocation: WorkmanLocationCreateInput!): WorkmanLocation
-  updateWorkmanLocation(workmanlocation: WorkmanLocationUpdateInput!): WorkmanLocation
-  deleteWorkmanLocation(id: ID!): WorkmanLocation
+  createWorker(worker: WorkerCreateInput!): Worker
+  updateWorker(worker: WorkerUpdateInput!): Worker
+  deleteWorker(id: ID!): Worker
+  createWorkerLocation(workerlocation: WorkerLocationCreateInput!): WorkerLocation
+  updateWorkerLocation(workerlocation: WorkerLocationUpdateInput!): WorkerLocation
+  deleteWorkerLocation(id: ID!): WorkerLocation
   createAdmin(admin: AdminCreateInput!): Admin
   updateAdmin(admin: AdminUpdateInput!): Admin
   deleteAdmin(id: ID!): Admin
-  createWorkmanService(workmanservice: WorkmanServiceCreateInput!): WorkmanService
-  updateWorkmanService(workmanservice: WorkmanServiceUpdateInput!): WorkmanService
-  deleteWorkmanService(id: ID!): WorkmanService
+  createWorkerService(workerservice: WorkerServiceCreateInput!): WorkerService
+  updateWorkerService(workerservice: WorkerServiceUpdateInput!): WorkerService
+  deleteWorkerService(id: ID!): WorkerService
   createService(service: ServiceCreateInput!): Service
   updateService(service: ServiceUpdateInput!): Service
   deleteService(id: ID!): Service
@@ -319,7 +319,7 @@ type ClientLocation {
   client: Client!
 }
 
-type Workman {
+type Worker {
   id: ID!
   name: String!
   email: String!
@@ -335,18 +335,18 @@ type Workman {
   dob: DateTime
   bio: String
   verified: Boolean
-  location: WorkmanLocation
-  services: [WorkmanService!]!
+  location: WorkerLocation
+  services: [WorkerService!]!
   work: [Work!]!
 }
 
-type WorkmanLocation {
+type WorkerLocation {
   id: ID!
   longitude: Float!
   latitude: Float!
   createdAt: DateTime!
   updatedAt: DateTime!
-  workman: Workman!
+  worker: Worker!
 }
 
 type Admin {
@@ -357,8 +357,8 @@ type Admin {
   joinedDate: DateTime!
 }
 
-type WorkmanService {
-  workman: Workman!
+type WorkerService {
+  worker: Worker!
   service: Service!
 }
 
@@ -368,7 +368,7 @@ type Service {
   description: String
   createdAt: DateTime!
   categories: [ServiceCategory!]!
-  workmen: [WorkmanService!]!
+  workmen: [WorkerService!]!
   work: [Work!]!
 }
 
@@ -389,7 +389,7 @@ type Work {
   id: ID!
   createdAt: DateTime!
   client: Client!
-  workman: Workman!
+  worker: Worker!
   service: Service!
   location: WorkLocation
   requestTime: DateTime!

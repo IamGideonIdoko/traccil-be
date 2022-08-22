@@ -32,7 +32,7 @@ Table ClientLocation {
   client Client [not null]
 }
 
-Table Workman {
+Table Worker {
   id String [pk]
   name String [not null]
   email String [unique, not null]
@@ -48,19 +48,19 @@ Table Workman {
   dob DateTime
   bio String
   verified Boolean [default: false]
-  location WorkmanLocation
-  services WorkmanService [not null]
+  location WorkerLocation
+  services WorkerService [not null]
   work Work [not null]
 }
 
-Table WorkmanLocation {
+Table WorkerLocation {
   id String [pk]
   longitude Float [not null]
   latitude Float [not null]
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
-  workmanId String [unique, not null]
-  workman Workman [not null]
+  workerId String [unique, not null]
+  worker Worker [not null]
 }
 
 Table Admin {
@@ -71,14 +71,14 @@ Table Admin {
   joinedDate DateTime [default: `now()`, not null]
 }
 
-Table WorkmanService {
-  workman Workman [not null]
-  workmanId String [not null]
+Table WorkerService {
+  worker Worker [not null]
+  workerId String [not null]
   service Service [not null]
   serviceId String [not null]
 
   indexes {
-    (workmanId, serviceId) [pk]
+    (workerId, serviceId) [pk]
   }
 }
 
@@ -88,7 +88,7 @@ Table Service {
   description String
   createdAt DateTime [default: `now()`, not null]
   categories ServiceCategory [not null]
-  workmen WorkmanService [not null]
+  workmen WorkerService [not null]
   work Work [not null]
 }
 
@@ -116,8 +116,8 @@ Table Work {
   createdAt DateTime [default: `now()`, not null]
   client Client [not null]
   clientId String [not null]
-  workman Workman [not null]
-  workmanId String [not null]
+  worker Worker [not null]
+  workerId String [not null]
   service Service [not null]
   serviceId String [not null]
   location WorkLocation
@@ -144,11 +144,11 @@ Enum Gender {
 
 Ref: ClientLocation.clientId - Client.id
 
-Ref: WorkmanLocation.workmanId - Workman.id
+Ref: WorkerLocation.workerId - Worker.id
 
-Ref: WorkmanService.workmanId > Workman.id
+Ref: WorkerService.workerId > Worker.id
 
-Ref: WorkmanService.serviceId > Service.id
+Ref: WorkerService.serviceId > Service.id
 
 Ref: ServiceCategory.categoryId > Category.id
 
@@ -156,7 +156,7 @@ Ref: ServiceCategory.serviceId > Service.id
 
 Ref: Work.clientId > Client.id
 
-Ref: Work.workmanId > Workman.id
+Ref: Work.workerId > Worker.id
 
 Ref: Work.serviceId > Service.id
 

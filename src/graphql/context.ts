@@ -1,7 +1,10 @@
 import { ContextFunction } from 'apollo-server-core';
+import { PrismaClient } from '@prisma/client';
 import DataLoader from 'dataloader';
 import { getBookByIds, getBooksByUserIds, getUserByIds } from './resolvers/data';
 import { IProducedContext } from '../interfaces/graphql.interface';
+
+const prisma = new PrismaClient();
 
 const createUserLoader = () => {
   // loader takes in a batch function
@@ -37,6 +40,7 @@ const context: ContextFunction<unknown, IProducedContext> = async () => {
       user: createUserLoader(),
       book: createBookLoader(),
     },
+    prisma,
   };
 };
 

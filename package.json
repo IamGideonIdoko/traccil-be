@@ -78,6 +78,7 @@
     "nodemon": "^2.0.19",
     "prettier": "^2.7.1",
     "prisma": "^4.2.1",
+    "prisma-dbml-generator": "^0.9.1",
     "ts-jest": "^28.0.7",
     "ts-node": "^10.9.1",
     "tslib": "^2.4.0",
@@ -90,5 +91,8 @@
     "hooks": {
       "pre-commit": "yarn lint && yarn test"
     }
+  },
+  "prisma": {
+    "seed": "ts-node prisma/seed.ts"
   }
 }

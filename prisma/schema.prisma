@@ -1,11 +1,155 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
+// Prisma Schema
+// Documentation: https://pris.ly/d/prisma-schema
 generator client {
   provider = "prisma-client-js"
 }
 
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
+
+
 datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
+  provider = "mysql"
+  url      = env("DB_CONNECTION_URL")
+}
+
+enum Gender {
+  MALE
+  FEMALE
+}
+
+model Client {
+  id            String   @id @default(uuid())
+  name          String
+  email         String   @unique
+  password      String
+  emailVerified Boolean? @default(false)
+  gender        Gender?
+  joinedDate    DateTime @default(now())
+  address       String?
+  country       String?
+  phone         String?
+  phoneVerified Boolean? @default(false)
+  avatar        String?
+  dob           DateTime?
+  bio           String?
+  verified      Boolean? @default(false)
+  location      ClientLocation?
+  work          Work[]
+}
+
+model ClientLocation {
+  id        String    @id @default(uuid())
+  longitude Float
+  latitude  Float
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  clientId  String    @unique
+  client    Client    @relation(fields: [clientId], references: [id])
+}
+
+model Workman {
+  id            String   @id @default(uuid())
+  name          String
+  email         String   @unique
+  password      String
+  emailVerified Boolean? @default(false)
+  gender        Gender?
+  joinedDate    DateTime @default(now())
+  address       String?
+  country       String?
+  phone         String?
+  phoneVerified Boolean? @default(false)
+  avatar        String?
+  dob           DateTime?
+  bio           String?
+  verified      Boolean? @default(false)
+  location      WorkmanLocation?
+  services      WorkmanService[]
+  work          Work[]
+}
+
+model WorkmanLocation {
+  id        String    @id @default(uuid())
+  longitude Float
+  latitude  Float
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  workmanId String    @unique
+  workman   Workman   @relation(fields: [workmanId], references: [id])
+}
+
+model Admin {
+  id            String   @id @default(uuid())
+  name          String
+  email         String   @unique
+  password      String
+  joinedDate    DateTime @default(now())
+}
+
+// Linking Model between Service and Category
+model WorkmanService {
+  workman      Workman  @relation(fields: [workmanId], references: [id])
+  workmanId    String
+  service      Service  @relation(fields: [serviceId], references: [id])
+  serviceId    String 
+  
+  @@id([workmanId, serviceId])
+}
+
+// Services (has many - to - many relation with Category and Workman)
+model Service {
+  id               String              @id
+  title            String              @db.VarChar(255) @unique
+  description      String?
+  createdAt        DateTime            @default(now())
+  categories       ServiceCategory[]
+  workmen          WorkmanService[]
+  work             Work[]
+}
+
+// Category (has many - to - many relation with Category)
+model Category {
+  id            String      @id
+  title         String      @db.VarChar(255) @unique
+  description   String?
+  createdAt     DateTime    @default(now())
+  services      ServiceCategory[]
+}
+
+// Linking Model between Service and Category
+model ServiceCategory {
+  category     Category @relation(fields: [categoryId], references: [id])
+  categoryId   String
+  service      Service  @relation(fields: [serviceId], references: [id])
+  serviceId    String 
+  
+  @@id([categoryId, serviceId])
+}
+
+model Work {
+  id            String            @id
+  createdAt     DateTime          @default(now())
+  client        Client            @relation(fields: [clientId], references: [id])
+  clientId      String 
+  workman       Workman           @relation(fields: [workmanId], references: [id])
+  workmanId     String
+  service       Service           @relation(fields: [serviceId], references: [id])
+  serviceId     String
+  location      WorkLocation?
+  requestTime   DateTime          @default(now())
+  workStartTime DateTime?
+  workEndTime   DateTime?
+  paymentId     String?
+}
+
+model WorkLocation {
+  id        String    @id @default(uuid())
+  longitude Float
+  latitude  Float
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  workId    String    @unique
+  work      Work      @relation(fields: [workId], references: [id])
 }

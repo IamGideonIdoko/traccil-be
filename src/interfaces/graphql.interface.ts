@@ -1,3 +1,4 @@
+import { PrismaClient } from '@prisma/client';
 import { UserModel, BookModel } from '../graphql/models';
 
 type LoaderActions<T = object> = {
@@ -11,4 +12,5 @@ export interface IProducedContext {
     user: Pick<LoaderActions<UserModel>, 'one' | 'many'>;
     book: Pick<LoaderActions<BookModel>, 'one' | 'many' | 'one_by_author'>;
   };
+  prisma: PrismaClient;
 }

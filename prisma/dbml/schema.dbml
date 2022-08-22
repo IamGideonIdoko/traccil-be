@@ -1,0 +1,163 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table Client {
+  id String [pk]
+  name String [not null]
+  email String [unique, not null]
+  password String [not null]
+  emailVerified Boolean [default: false]
+  gender Gender
+  joinedDate DateTime [default: `now()`, not null]
+  address String
+  country String
+  phone String
+  phoneVerified Boolean [default: false]
+  avatar String
+  dob DateTime
+  bio String
+  verified Boolean [default: false]
+  location ClientLocation
+  work Work [not null]
+}
+
+Table ClientLocation {
+  id String [pk]
+  longitude Float [not null]
+  latitude Float [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  clientId String [unique, not null]
+  client Client [not null]
+}
+
+Table Workman {
+  id String [pk]
+  name String [not null]
+  email String [unique, not null]
+  password String [not null]
+  emailVerified Boolean [default: false]
+  gender Gender
+  joinedDate DateTime [default: `now()`, not null]
+  address String
+  country String
+  phone String
+  phoneVerified Boolean [default: false]
+  avatar String
+  dob DateTime
+  bio String
+  verified Boolean [default: false]
+  location WorkmanLocation
+  services WorkmanService [not null]
+  work Work [not null]
+}
+
+Table WorkmanLocation {
+  id String [pk]
+  longitude Float [not null]
+  latitude Float [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  workmanId String [unique, not null]
+  workman Workman [not null]
+}
+
+Table Admin {
+  id String [pk]
+  name String [not null]
+  email String [unique, not null]
+  password String [not null]
+  joinedDate DateTime [default: `now()`, not null]
+}
+
+Table WorkmanService {
+  workman Workman [not null]
+  workmanId String [not null]
+  service Service [not null]
+  serviceId String [not null]
+
+  indexes {
+    (workmanId, serviceId) [pk]
+  }
+}
+
+Table Service {
+  id String [pk]
+  title String [unique, not null]
+  description String
+  createdAt DateTime [default: `now()`, not null]
+  categories ServiceCategory [not null]
+  workmen WorkmanService [not null]
+  work Work [not null]
+}
+
+Table Category {
+  id String [pk]
+  title String [unique, not null]
+  description String
+  createdAt DateTime [default: `now()`, not null]
+  services ServiceCategory [not null]
+}
+
+Table ServiceCategory {
+  category Category [not null]
+  categoryId String [not null]
+  service Service [not null]
+  serviceId String [not null]
+
+  indexes {
+    (categoryId, serviceId) [pk]
+  }
+}
+
+Table Work {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  client Client [not null]
+  clientId String [not null]
+  workman Workman [not null]
+  workmanId String [not null]
+  service Service [not null]
+  serviceId String [not null]
+  location WorkLocation
+  requestTime DateTime [default: `now()`, not null]
+  workStartTime DateTime
+  workEndTime DateTime
+  paymentId String
+}
+
+Table WorkLocation {
+  id String [pk]
+  longitude Float [not null]
+  latitude Float [not null]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  workId String [unique, not null]
+  work Work [not null]
+}
+
+Enum Gender {
+  MALE
+  FEMALE
+}
+
+Ref: ClientLocation.clientId - Client.id
+
+Ref: WorkmanLocation.workmanId - Workman.id
+
+Ref: WorkmanService.workmanId > Workman.id
+
+Ref: WorkmanService.serviceId > Service.id
+
+Ref: ServiceCategory.categoryId > Category.id
+
+Ref: ServiceCategory.serviceId > Service.id
+
+Ref: Work.clientId > Client.id
+
+Ref: Work.workmanId > Workman.id
+
+Ref: Work.serviceId > Service.id
+
+Ref: WorkLocation.workId - Work.id

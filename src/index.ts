@@ -10,6 +10,7 @@ import morgan from 'morgan';
 import limiter from './config/limiter.config';
 import appCors from './config/cors.config';
 import getApolloServer from './graphql/index';
+import { prisma } from './graphql/context';
 
 config();
 
@@ -47,6 +48,14 @@ config();
 
   // cors
   app.use(appCors());
+
+  // test prisma connection
+  try {
+    await prisma.$connect();
+    console.log('\x1b[32m%s\x1b[0m', '😎 Prisma connected to database');
+  } catch (err) {
+    console.log('\x1b[31m%s\x1b[0m', '😔 Prisma failed to connect database');
+  }
 
   // Routes
   app.get('/', (_req: Request, res: Response) => {

@@ -44,4 +44,6 @@ const context: ContextFunction<unknown, IProducedContext> = async () => {
   };
 };
 
+export { prisma };
+
 export default context;

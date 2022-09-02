@@ -27,7 +27,7 @@ generator docs {
 
 generator joi {
   provider = "prisma-joi-generator"
-  output = "./joi/schemas"
+  output = "./joi"
 }
 
 datasource db {

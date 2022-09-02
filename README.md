@@ -77,6 +77,13 @@ This is the core backend service for OgaRepair.
     yarn server:docs
     ```
 
+- Run Prisma Studio (Database data visual editor / management tool)
+
+  ```bash
+  yarn studio
+  ```
+  
+
 ## Databases
 
 By default, the project is configured to connect to a MySQL database using [Prisma](https://prima.io). The ERD for this project's database is given below:
@@ -88,10 +95,16 @@ By default, the project is configured to connect to a MySQL database using [Pris
 1. Create a new migration using:
 
    ```bash
-   npx prisma migrate dev --name [migration-name]
+   yarn migrate dev --name [migration-name]
    ```
 
-2. Run the below after every valid update made to the Prisma schema file:
+2. Use the below command to seed the database
+
+    ```bash
+    yarn seed
+    ```
+
+3. Run the below after every valid update made to the Prisma schema file:
 
    ```bash
    yarn generate:prisma
@@ -99,9 +112,9 @@ By default, the project is configured to connect to a MySQL database using [Pris
 
    This will run all generators connected to Prisma.
 
-3. All tests should be written inside the `tests` folder in the root directory.
+4. All tests should be written inside the `tests` folder in the root directory.
 
-4. Run the below after every valid update made to the GraphQL schema files:
+5. Run the below after every valid update made to the GraphQL schema files:
 
    ```bash
    yarn generate:types
@@ -109,15 +122,23 @@ By default, the project is configured to connect to a MySQL database using [Pris
 
    This will regenerate TypeScript types for the GraphQL resolvers.
 
-5. Tests and linting checks run before any change is committed. Kindly ensure you follow the defined rules and properly write tests for all your contributions.
-6. Do not alter any configuration files without contacting team members.
-7. Do not install or manage any dependency with `npm` use `yarn` instead.
-8. Write meaningful commit messages.
-9. Do not push changes directly to the master branch. Push to remote branch of your local branch instead.
+6. Tests and linting checks run before any change is committed. Kindly ensure you follow the defined rules and properly write tests for all your contributions.
+
+7. Do not alter any configuration files without contacting team members.
+
+8. Do not install or manage any dependency with `npm` use `yarn` instead.
+
+9. Write meaningful commit messages.
+
+10. Do not push changes directly to the master branch. Push to the remote branch of your local branch instead.
+
+11. You can get GraphQL schema hints from the generated GraphQL schema located at `prisma/graphql/schema.graphql`.
+
+12. You can get Joi schema hints from the generated Joi schemas located at `prisma/joi/schemas`
 
 ## Useful Tips
 
-- Install the Prisma, GraphQL, and ESLint extension to help with syntax highlighting and more.
+- Install the Prisma, GraphQL, and ESLint extensions to help with syntax highlighting and more.
 
 ~ Enjoy 😊
 

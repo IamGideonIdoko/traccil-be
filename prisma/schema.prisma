@@ -25,6 +25,11 @@ generator docs {
   provider = "node node_modules/prisma-docs-generator"
 }
 
+generator joi {
+  provider = "prisma-joi-generator"
+  output = "./joi/schemas"
+}
+
 datasource db {
   provider = "mysql"
   url      = env("DB_CONNECTION_URL")

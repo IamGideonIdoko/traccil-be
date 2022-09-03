@@ -111,7 +111,7 @@ model Admin {
   joinedDate    DateTime @default(now())
 }
 
-// Linking Model between Service and Category
+// Linking Model between Service and Section
 model WorkerService {
   worker      Worker  @relation(fields: [workerId], references: [id])
   workerId    String
@@ -121,34 +121,34 @@ model WorkerService {
   @@id([workerId, serviceId])
 }
 
-// Services (has many - to - many relation with Category and Worker)
+// Services (has many - to - many relation with Section and Worker)
 model Service {
   id               String              @id
   title            String              @db.VarChar(255) @unique
   description      String?
   createdAt        DateTime            @default(now())
-  categories       ServiceCategory[]
+  sections       ServiceSection[]
   workmen          WorkerService[]
   work             Work[]
 }
 
-// Category (has many - to - many relation with Category)
-model Category {
+// Section (has many - to - many relation with Section)
+model Section {
   id            String      @id
   title         String      @db.VarChar(255) @unique
   description   String?
   createdAt     DateTime    @default(now())
-  services      ServiceCategory[]
+  services      ServiceSection[]
 }
 
-// Linking Model between Service and Category
-model ServiceCategory {
-  category     Category @relation(fields: [categoryId], references: [id])
-  categoryId   String
+// Linking Model between Service and Section
+model ServiceSection {
+  section     Section @relation(fields: [sectionId], references: [id])
+  sectionId   String
   service      Service  @relation(fields: [serviceId], references: [id])
   serviceId    String 
   
-  @@id([categoryId, serviceId])
+  @@id([sectionId, serviceId])
 }
 
 model Work {

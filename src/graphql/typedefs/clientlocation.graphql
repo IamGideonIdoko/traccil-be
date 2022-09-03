@@ -1,0 +1,8 @@
+type ClientLocation {
+  id: ID!
+  longitude: Float!
+  latitude: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  client: Client!
+}

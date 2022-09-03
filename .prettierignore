@@ -2,3 +2,4 @@
 node_modules/
 .eslintcache
 src/graphql/generated-types.ts
+prisma/joi/

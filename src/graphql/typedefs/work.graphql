@@ -1,0 +1,12 @@
+type Work {
+  id: ID!
+  createdAt: DateTime!
+  client: Client!
+  worker: Worker!
+  service: Service!
+  location: WorkLocation
+  requestTime: DateTime!
+  workStartTime: DateTime
+  workEndTime: DateTime
+  paymentId: String
+}

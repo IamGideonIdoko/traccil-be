@@ -1,0 +1,8 @@
+type WorkerLocation {
+  id: ID!
+  longitude: Float!
+  latitude: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  worker: Worker!
+}

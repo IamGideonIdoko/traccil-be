@@ -21,10 +21,10 @@ type Query {
   workerservices: [WorkerService!]!
   service(id: ID!): Service
   services: [Service!]!
-  category(id: ID!): Category
-  categorys: [Category!]!
-  servicecategory(id: ID!): ServiceCategory
-  servicecategorys: [ServiceCategory!]!
+  section(id: ID!): Section
+  sections: [Section!]!
+  servicesection(id: ID!): ServiceSection
+  servicesections: [ServiceSection!]!
   work(id: ID!): Work
   works: [Work!]!
   worklocation(id: ID!): WorkLocation
@@ -169,7 +169,7 @@ input ServiceCreateInput {
   title: String!
   description: String
   createdAt: DateTime!
-  categories: [ServiceCategory!]!
+  sections: [ServiceSection!]!
   workmen: [WorkerService!]!
   work: [Work!]!
 }
@@ -178,32 +178,32 @@ input ServiceUpdateInput {
   title: String
   description: String
   createdAt: DateTime
-  categories: [ServiceCategory!]
+  sections: [ServiceSection!]
   workmen: [WorkerService!]
   work: [Work!]
 }
 
-input CategoryCreateInput {
+input SectionCreateInput {
   title: String!
   description: String
   createdAt: DateTime!
-  services: [ServiceCategory!]!
+  services: [ServiceSection!]!
 }
 
-input CategoryUpdateInput {
+input SectionUpdateInput {
   title: String
   description: String
   createdAt: DateTime
-  services: [ServiceCategory!]
+  services: [ServiceSection!]
 }
 
-input ServiceCategoryCreateInput {
-  category: Category!
+input ServiceSectionCreateInput {
+  section: Section!
   service: Service!
 }
 
-input ServiceCategoryUpdateInput {
-  category: Category
+input ServiceSectionUpdateInput {
+  section: Section
   service: Service
 }
 
@@ -269,12 +269,12 @@ type Mutation {
   createService(service: ServiceCreateInput!): Service
   updateService(service: ServiceUpdateInput!): Service
   deleteService(id: ID!): Service
-  createCategory(category: CategoryCreateInput!): Category
-  updateCategory(category: CategoryUpdateInput!): Category
-  deleteCategory(id: ID!): Category
-  createServiceCategory(servicecategory: ServiceCategoryCreateInput!): ServiceCategory
-  updateServiceCategory(servicecategory: ServiceCategoryUpdateInput!): ServiceCategory
-  deleteServiceCategory(id: ID!): ServiceCategory
+  createSection(section: SectionCreateInput!): Section
+  updateSection(section: SectionUpdateInput!): Section
+  deleteSection(id: ID!): Section
+  createServiceSection(servicesection: ServiceSectionCreateInput!): ServiceSection
+  updateServiceSection(servicesection: ServiceSectionUpdateInput!): ServiceSection
+  deleteServiceSection(id: ID!): ServiceSection
   createWork(work: WorkCreateInput!): Work
   updateWork(work: WorkUpdateInput!): Work
   deleteWork(id: ID!): Work
@@ -367,21 +367,21 @@ type Service {
   title: String!
   description: String
   createdAt: DateTime!
-  categories: [ServiceCategory!]!
+  sections: [ServiceSection!]!
   workmen: [WorkerService!]!
   work: [Work!]!
 }
 
-type Category {
+type Section {
   id: ID!
   title: String!
   description: String
   createdAt: DateTime!
-  services: [ServiceCategory!]!
+  services: [ServiceSection!]!
 }
 
-type ServiceCategory {
-  category: Category!
+type ServiceSection {
+  section: Section!
   service: Service!
 }
 

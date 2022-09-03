@@ -1,0 +1,9 @@
+type Service {
+  id: ID!
+  title: String!
+  description: String
+  createdAt: DateTime!
+  sections: [ServiceSection!]!
+  workmen: [WorkerService!]!
+  work: [Work!]!
+}

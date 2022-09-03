@@ -1,0 +1,4 @@
+type WorkerService {
+  worker: Worker!
+  service: Service!
+}

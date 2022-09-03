@@ -8,3 +8,8 @@ generates:
       mappers:
         User: ./models#UserModel
         Book: ./models#BookModel
+      scalars:
+        DateTime: string
+        Date: string
+        JSON: string
+        UUID: string

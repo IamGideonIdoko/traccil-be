@@ -87,27 +87,27 @@ Table Service {
   title String [unique, not null]
   description String
   createdAt DateTime [default: `now()`, not null]
-  categories ServiceCategory [not null]
+  sections ServiceSection [not null]
   workmen WorkerService [not null]
   work Work [not null]
 }
 
-Table Category {
+Table Section {
   id String [pk]
   title String [unique, not null]
   description String
   createdAt DateTime [default: `now()`, not null]
-  services ServiceCategory [not null]
+  services ServiceSection [not null]
 }
 
-Table ServiceCategory {
-  category Category [not null]
-  categoryId String [not null]
+Table ServiceSection {
+  section Section [not null]
+  sectionId String [not null]
   service Service [not null]
   serviceId String [not null]
 
   indexes {
-    (categoryId, serviceId) [pk]
+    (sectionId, serviceId) [pk]
   }
 }
 
@@ -150,9 +150,9 @@ Ref: WorkerService.workerId > Worker.id
 
 Ref: WorkerService.serviceId > Service.id
 
-Ref: ServiceCategory.categoryId > Category.id
+Ref: ServiceSection.sectionId > Section.id
 
-Ref: ServiceCategory.serviceId > Service.id
+Ref: ServiceSection.serviceId > Service.id
 
 Ref: Work.clientId > Client.id
 

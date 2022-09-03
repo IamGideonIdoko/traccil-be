@@ -890,6 +890,15 @@
     tslib "^2.4.0"
     unixify "^1.0.0"
 
+"@graphql-tools/load-files@^6.6.1":
+  version "6.6.1"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/load-files/-/load-files-6.6.1.tgz#91ce18d910baf8678459486d8cccd474767bec0a"
+  integrity sha512-nd4GOjdD68bdJkHfRepILb0gGwF63mJI7uD4oJuuf2Kzeq8LorKa6WfyxUhdMuLmZhnx10zdAlWPfwv1NOAL4Q==
+  dependencies:
+    globby "11.1.0"
+    tslib "^2.4.0"
+    unixify "1.0.0"
+
 "@graphql-tools/load@^7.5.5", "@graphql-tools/load@^7.7.1", "@graphql-tools/load@^7.7.4":
   version "7.7.4"
   resolved "https://registry.npmjs.org/@graphql-tools/load/-/load-7.7.4.tgz"
@@ -914,6 +923,14 @@
   integrity sha512-EfULshN2s2s2mhBwbV9WpGnoehRLe7eIMdZrKfHhxlBWOvtNUd3KSCN0PUdAMd7lj1jXUW9KYdn624JrVn6qzg==
   dependencies:
     "@graphql-tools/utils" "8.10.0"
+    tslib "^2.4.0"
+
+"@graphql-tools/merge@^8.3.4":
+  version "8.3.4"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/merge/-/merge-8.3.4.tgz#749f710d3a930512e6ca36e3bb053c12e22ef332"
+  integrity sha512-2z1UpHvvI52nQZIYArU+rPq1lOENWetsdb+6vu8yLGyCRP4CpKMBvtmiHkbrlPBO8dItpZ08szXEoaStfJHBxQ==
+  dependencies:
+    "@graphql-tools/utils" "8.10.1"
     tslib "^2.4.0"
 
 "@graphql-tools/mock@^8.1.2":
@@ -1012,6 +1029,13 @@
   version "8.10.0"
   resolved "https://registry.npmjs.org/@graphql-tools/utils/-/utils-8.10.0.tgz"
   integrity sha512-yI+V373FdXQbYfqdarehn9vRWDZZYuvyQ/xwiv5ez2BbobHrqsexF7qs56plLRaQ8ESYpVAjMQvJWe9s23O0Jg==
+  dependencies:
+    tslib "^2.4.0"
+
+"@graphql-tools/utils@8.10.1":
+  version "8.10.1"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-8.10.1.tgz#3224fe0611c9bb51e6a5c16472ae17afbd6c5465"
+  integrity sha512-UYi/afPvxZ8mz0LjplMxOSmGDPenVS/Q0zJ/6LOyF9yZdJYIDe+J+Qr/I9+rCYQmgBW4BJeRUUc7VoUzZPfZDA==
   dependencies:
     tslib "^2.4.0"
 
@@ -1580,11 +1604,6 @@
   version "3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e"
   resolved "https://registry.yarnpkg.com/@prisma/engines/-/engines-3.15.1-1.461d6a05159055555eb7dfb337c9fb271cbd4d7e.tgz#f691893df506b93e3cb1ccc15ec6e5ac64e8e570"
   integrity sha512-NHlojO1DFTsSi3FtEleL9QWXeSF/UjhCW0fgpi7bumnNZ4wj/eQ+BJJ5n2pgoOliTOGv9nX2qXvmHap7rJMNmg==
-
-"@prisma/engines@4.2.1":
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/@prisma/engines/-/engines-4.2.1.tgz#60c7d0acc1c0c5b70ece712e2cbe13f46a345d6e"
-  integrity sha512-0KqBwREUOjBiHwITsQzw2DWfLHjntvbqzGRawj4sBMnIiL5CXwyDUKeHOwXzKMtNr1rEjxEsypM14g0CzLRK3g==
 
 "@prisma/engines@4.3.1":
   version "4.3.1"
@@ -6197,12 +6216,12 @@ prisma-joi-generator@^0.2.0:
     prettier "^2.7.1"
     tslib "^2.4.0"
 
-prisma@^4.2.1:
-  version "4.2.1"
-  resolved "https://registry.yarnpkg.com/prisma/-/prisma-4.2.1.tgz#3558359f15021aa4767de8c6d0ca1f285cf33d65"
-  integrity sha512-HuYqnTDgH8atjPGtYmY0Ql9XrrJnfW7daG1PtAJRW0E6gJxc50lY3vrIDn0yjMR3TvRlypjTcspQX8DT+xD4Sg==
+prisma@^4.3.1:
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/prisma/-/prisma-4.3.1.tgz#9e4c24e49710392be40ee75fb3d9341d7487881e"
+  integrity sha512-90xo06wtqil76Xsi3mNpc4Js3SdDRR5g4qb9h+4VWY4Y8iImJY6xc3PX+C9xxTSt1lr0Q89A0MLkJjd8ax6KiQ==
   dependencies:
-    "@prisma/engines" "4.2.1"
+    "@prisma/engines" "4.3.1"
 
 prismjs@^1.25.0:
   version "1.28.0"
@@ -7232,7 +7251,7 @@ universalify@^2.0.0:
   resolved "https://registry.yarnpkg.com/universalify/-/universalify-2.0.0.tgz#75a4984efedc4b08975c5aeb73f530d02df25717"
   integrity sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==
 
-unixify@^1.0.0:
+unixify@1.0.0, unixify@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/unixify/-/unixify-1.0.0.tgz"
   integrity sha512-6bc58dPYhCMHHuwxldQxO3RRNZ4eCogZ/st++0+fcC1nr0jiGUtAdBJ2qzmLQWSxbtz42pWt4QQMiZ9HvZf5cg==

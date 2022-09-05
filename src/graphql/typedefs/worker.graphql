@@ -1,20 +1,43 @@
 type Worker {
   id: ID!
   name: String!
-  email: String!
+  email: EmailAddress!
   password: String!
   emailVerified: Boolean
   gender: Gender
   joinedDate: DateTime!
   address: String
   country: String
-  phone: String
+  phone: PhoneNumber
   phoneVerified: Boolean
-  avatar: String
+  avatar: URL
   dob: DateTime
   bio: String
   verified: Boolean
   location: WorkerLocation
   services: [WorkerService!]!
   work: [Work!]!
+}
+
+type RegisteredWorker {
+  id: ID!
+  name: String!
+  email: EmailAddress!
+  emailVerified: Boolean
+  gender: Gender
+  joinedDate: DateTime!
+  address: String
+  country: String
+  phone: PhoneNumber
+  phoneVerified: Boolean
+  avatar: URL
+  dob: DateTime
+  bio: String
+  verified: Boolean
+}
+
+type ReturnedRegisteredWorker implements Token {
+  accessToken: JWT!
+  refreshToken: JWT!
+  worker: RegisteredWorker!
 }

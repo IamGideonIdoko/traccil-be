@@ -1,16 +1,13 @@
 input WorkerCreateInput {
   name: String!
-  email: String!
+  email: EmailAddress!
   password: String!
-  emailVerified: Boolean
+  retypedpassword: String!
   gender: Gender
-  joinedDate: DateTime!
+  joinedDate: DateTime
   address: String
   country: String
-  phone: String
-  phoneVerified: Boolean
-  avatar: String
+  phone: PhoneNumber
   dob: DateTime
   bio: String
-  verified: Boolean
 }

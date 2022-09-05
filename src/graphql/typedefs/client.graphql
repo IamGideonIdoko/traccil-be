@@ -1,14 +1,14 @@
 type Client {
   id: ID!
   name: String!
-  email: String!
+  email: EmailAddress!
   password: String!
   emailVerified: Boolean
   gender: Gender
   joinedDate: DateTime!
   address: String
   country: String
-  phone: String
+  phone: PhoneNumber
   phoneVerified: Boolean
   avatar: String
   dob: DateTime

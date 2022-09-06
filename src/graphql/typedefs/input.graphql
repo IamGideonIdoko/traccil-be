@@ -1,16 +1,12 @@
-input WorkerCreateInput {
+input RegisterWorkerInput {
   name: String!
-  email: String!
+  email: EmailAddress!
   password: String!
-  emailVerified: Boolean
+  repeat_password: String!
   gender: Gender
-  joinedDate: DateTime!
   address: String
   country: String
-  phone: String
-  phoneVerified: Boolean
-  avatar: String
+  phone: PhoneNumber
   dob: DateTime
   bio: String
-  verified: Boolean
 }

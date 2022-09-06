@@ -24,5 +24,6 @@ type Mutation {
     userId: String
   ): Book
 
-  createWorker(worker: WorkerCreateInput!): Worker
+  # Worker
+  registerWorker(worker: RegisterWorkerInput!): ReturnedRegisteredWorker
 }

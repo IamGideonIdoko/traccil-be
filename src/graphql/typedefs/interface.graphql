@@ -1,0 +1,8 @@
+"""
+This file holds all interfaces defined in the GraphQL schema of this app.
+"""
+
+interface Token {
+    accessToken: JWT! # must be implemented
+    refreshToken: JWT! # must be implemented
+}

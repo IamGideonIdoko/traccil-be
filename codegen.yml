@@ -9,8 +9,8 @@ generates:
         User: ./models#UserModel
         Book: ./models#BookModel
       scalars:
-        DateTime: string
-        Date: string
+        DateTime: Date
+        Date: Date
         JSON: string
         UUID: string
         EmailAddress: string

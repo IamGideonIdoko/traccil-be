@@ -29,9 +29,9 @@ export type Scalars = {
   /** A field whose value conforms to the standard DID format as specified in did-core: https://www.w3.org/TR/did-core/. */
   DID: string;
   /** A date string, such as 2007-12-03, compliant with the `full-date` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
-  Date: string;
+  Date: Date;
   /** A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar. */
-  DateTime: string;
+  DateTime: Date;
   /**
    *
    *     A string representing a duration conforming to the ISO8601 standard,

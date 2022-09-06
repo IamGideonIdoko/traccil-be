@@ -2,8 +2,6 @@ import jwt, { JwtPayload } from 'jsonwebtoken';
 import constants from '../config/constants.config';
 import type { JwtCustomPayload } from '../interfaces/helper.interface';
 
-/*  */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const signAccessToken = async (payload: JwtCustomPayload): Promise<string> => {
   return new Promise<string>((resolve, reject) => {
     jwt.sign(payload, constants.accessTokenSecret, { expiresIn: constants.accessTokenSpan }, (err, token) => {

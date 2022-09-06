@@ -6,3 +6,9 @@ export interface ILogger {
   errorBg: (message: string, data?: unknown) => void;
   infoBg: (message: string, data?: unknown) => void;
 }
+
+export interface JwtCustomPayload {
+  workerId?: string;
+  clientId?: string;
+  adminId?: string;
+}

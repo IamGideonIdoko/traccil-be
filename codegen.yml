@@ -16,3 +16,5 @@ generates:
         EmailAddress: string
         PhoneNumber: string
         JWT: string
+      contextType: ../interfaces/graphql.interface#IProducedContext
+        

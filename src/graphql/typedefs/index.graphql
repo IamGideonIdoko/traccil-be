@@ -25,5 +25,5 @@ type Mutation {
   ): Book
 
   # Worker
-  registerWorker(worker: WorkerCreateInput!): ReturnedRegisteredWorker
+  registerWorker(worker: RegisterWorkerInput!): ReturnedRegisteredWorker
 }

@@ -1,10 +1,9 @@
-input WorkerCreateInput {
+input RegisterWorkerInput {
   name: String!
   email: EmailAddress!
   password: String!
-  retypedpassword: String!
+  repeat_password: String!
   gender: Gender
-  joinedDate: DateTime
   address: String
   country: String
   phone: PhoneNumber

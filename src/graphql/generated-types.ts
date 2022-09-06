@@ -1,5 +1,6 @@
 import { GraphQLResolveInfo, GraphQLScalarType, GraphQLScalarTypeConfig } from 'graphql';
 import { UserModel, BookModel } from './models';
+import { IProducedContext } from '../interfaces/graphql.interface';
 export type Maybe<T> = T | null;
 export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
@@ -237,7 +238,7 @@ export type MutationAddUserArgs = {
 
 
 export type MutationRegisterWorkerArgs = {
-  worker: WorkerCreateInput;
+  worker: RegisterWorkerInput;
 };
 
 export type Query = {
@@ -256,6 +257,19 @@ export type QueryBookArgs = {
 
 export type QueryUserArgs = {
   id: Scalars['ID'];
+};
+
+export type RegisterWorkerInput = {
+  address?: InputMaybe<Scalars['String']>;
+  bio?: InputMaybe<Scalars['String']>;
+  country?: InputMaybe<Scalars['String']>;
+  dob?: InputMaybe<Scalars['DateTime']>;
+  email: Scalars['EmailAddress'];
+  gender?: InputMaybe<Gender>;
+  name: Scalars['String'];
+  password: Scalars['String'];
+  phone?: InputMaybe<Scalars['PhoneNumber']>;
+  repeat_password: Scalars['String'];
 };
 
 export type RegisteredWorker = {
@@ -367,20 +381,6 @@ export type Worker = {
   services: Array<WorkerService>;
   verified?: Maybe<Scalars['Boolean']>;
   work: Array<Work>;
-};
-
-export type WorkerCreateInput = {
-  address?: InputMaybe<Scalars['String']>;
-  bio?: InputMaybe<Scalars['String']>;
-  country?: InputMaybe<Scalars['String']>;
-  dob?: InputMaybe<Scalars['DateTime']>;
-  email: Scalars['EmailAddress'];
-  gender?: InputMaybe<Gender>;
-  joinedDate?: InputMaybe<Scalars['DateTime']>;
-  name: Scalars['String'];
-  password: Scalars['String'];
-  phone?: InputMaybe<Scalars['PhoneNumber']>;
-  retypedpassword: Scalars['String'];
 };
 
 export type WorkerLocation = {
@@ -525,6 +525,7 @@ export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   RGB: ResolverTypeWrapper<Scalars['RGB']>;
   RGBA: ResolverTypeWrapper<Scalars['RGBA']>;
+  RegisterWorkerInput: RegisterWorkerInput;
   RegisteredWorker: ResolverTypeWrapper<RegisteredWorker>;
   ReturnedRegisteredWorker: ResolverTypeWrapper<ReturnedRegisteredWorker>;
   RoutingNumber: ResolverTypeWrapper<Scalars['RoutingNumber']>;
@@ -548,7 +549,6 @@ export type ResolversTypes = {
   Work: ResolverTypeWrapper<Work>;
   WorkLocation: ResolverTypeWrapper<WorkLocation>;
   Worker: ResolverTypeWrapper<Worker>;
-  WorkerCreateInput: WorkerCreateInput;
   WorkerLocation: ResolverTypeWrapper<WorkerLocation>;
   WorkerService: ResolverTypeWrapper<WorkerService>;
 };
@@ -611,6 +611,7 @@ export type ResolversParentTypes = {
   Query: {};
   RGB: Scalars['RGB'];
   RGBA: Scalars['RGBA'];
+  RegisterWorkerInput: RegisterWorkerInput;
   RegisteredWorker: RegisteredWorker;
   ReturnedRegisteredWorker: ReturnedRegisteredWorker;
   RoutingNumber: Scalars['RoutingNumber'];
@@ -634,7 +635,6 @@ export type ResolversParentTypes = {
   Work: Work;
   WorkLocation: WorkLocation;
   Worker: Worker;
-  WorkerCreateInput: WorkerCreateInput;
   WorkerLocation: WorkerLocation;
   WorkerService: WorkerService;
 };
@@ -647,7 +647,7 @@ export interface BigIntScalarConfig extends GraphQLScalarTypeConfig<ResolversTyp
   name: 'BigInt';
 }
 
-export type BookResolvers<ContextType = any, ParentType extends ResolversParentTypes['Book'] = ResolversParentTypes['Book']> = {
+export type BookResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['Book'] = ResolversParentTypes['Book']> = {
   genre?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   name?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -659,7 +659,7 @@ export interface ByteScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
   name: 'Byte';
 }
 
-export type ClientResolvers<ContextType = any, ParentType extends ResolversParentTypes['Client'] = ResolversParentTypes['Client']> = {
+export type ClientResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['Client'] = ResolversParentTypes['Client']> = {
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   avatar?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -680,7 +680,7 @@ export type ClientResolvers<ContextType = any, ParentType extends ResolversParen
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type ClientLocationResolvers<ContextType = any, ParentType extends ResolversParentTypes['ClientLocation'] = ResolversParentTypes['ClientLocation']> = {
+export type ClientLocationResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['ClientLocation'] = ResolversParentTypes['ClientLocation']> = {
   client?: Resolver<ResolversTypes['Client'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -806,7 +806,7 @@ export interface MacScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes[
   name: 'MAC';
 }
 
-export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+export type MutationResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   addBook?: Resolver<Maybe<ResolversTypes['Book']>, ParentType, ContextType, Partial<MutationAddBookArgs>>;
   addUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<MutationAddUserArgs>>;
   registerWorker?: Resolver<Maybe<ResolversTypes['ReturnedRegisteredWorker']>, ParentType, ContextType, RequireFields<MutationRegisterWorkerArgs, 'worker'>>;
@@ -864,7 +864,7 @@ export interface PostalCodeScalarConfig extends GraphQLScalarTypeConfig<Resolver
   name: 'PostalCode';
 }
 
-export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+export type QueryResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   book?: Resolver<Maybe<ResolversTypes['Book']>, ParentType, ContextType, RequireFields<QueryBookArgs, 'id'>>;
   books?: Resolver<Maybe<Array<Maybe<ResolversTypes['Book']>>>, ParentType, ContextType>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
@@ -879,7 +879,7 @@ export interface RgbaScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
   name: 'RGBA';
 }
 
-export type RegisteredWorkerResolvers<ContextType = any, ParentType extends ResolversParentTypes['RegisteredWorker'] = ResolversParentTypes['RegisteredWorker']> = {
+export type RegisteredWorkerResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['RegisteredWorker'] = ResolversParentTypes['RegisteredWorker']> = {
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   avatar?: Resolver<Maybe<ResolversTypes['URL']>, ParentType, ContextType>;
   bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -897,7 +897,7 @@ export type RegisteredWorkerResolvers<ContextType = any, ParentType extends Reso
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type ReturnedRegisteredWorkerResolvers<ContextType = any, ParentType extends ResolversParentTypes['ReturnedRegisteredWorker'] = ResolversParentTypes['ReturnedRegisteredWorker']> = {
+export type ReturnedRegisteredWorkerResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['ReturnedRegisteredWorker'] = ResolversParentTypes['ReturnedRegisteredWorker']> = {
   accessToken?: Resolver<ResolversTypes['JWT'], ParentType, ContextType>;
   refreshToken?: Resolver<ResolversTypes['JWT'], ParentType, ContextType>;
   worker?: Resolver<ResolversTypes['RegisteredWorker'], ParentType, ContextType>;
@@ -912,7 +912,7 @@ export interface SafeIntScalarConfig extends GraphQLScalarTypeConfig<ResolversTy
   name: 'SafeInt';
 }
 
-export type SectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['Section'] = ResolversParentTypes['Section']> = {
+export type SectionResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['Section'] = ResolversParentTypes['Section']> = {
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -921,7 +921,7 @@ export type SectionResolvers<ContextType = any, ParentType extends ResolversPare
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type ServiceResolvers<ContextType = any, ParentType extends ResolversParentTypes['Service'] = ResolversParentTypes['Service']> = {
+export type ServiceResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['Service'] = ResolversParentTypes['Service']> = {
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   description?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -932,7 +932,7 @@ export type ServiceResolvers<ContextType = any, ParentType extends ResolversPare
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type ServiceSectionResolvers<ContextType = any, ParentType extends ResolversParentTypes['ServiceSection'] = ResolversParentTypes['ServiceSection']> = {
+export type ServiceSectionResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['ServiceSection'] = ResolversParentTypes['ServiceSection']> = {
   section?: Resolver<ResolversTypes['Section'], ParentType, ContextType>;
   service?: Resolver<ResolversTypes['Service'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
@@ -950,7 +950,7 @@ export interface TimestampScalarConfig extends GraphQLScalarTypeConfig<Resolvers
   name: 'Timestamp';
 }
 
-export type TokenResolvers<ContextType = any, ParentType extends ResolversParentTypes['Token'] = ResolversParentTypes['Token']> = {
+export type TokenResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['Token'] = ResolversParentTypes['Token']> = {
   __resolveType: TypeResolveFn<'ReturnedRegisteredWorker', ParentType, ContextType>;
   accessToken?: Resolver<ResolversTypes['JWT'], ParentType, ContextType>;
   refreshToken?: Resolver<ResolversTypes['JWT'], ParentType, ContextType>;
@@ -976,7 +976,7 @@ export interface UnsignedIntScalarConfig extends GraphQLScalarTypeConfig<Resolve
   name: 'UnsignedInt';
 }
 
-export type UserResolvers<ContextType = any, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
+export type UserResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['User'] = ResolversParentTypes['User']> = {
   age?: Resolver<Maybe<ResolversTypes['Int']>, ParentType, ContextType>;
   books?: Resolver<Maybe<Array<ResolversTypes['Book']>>, ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -992,7 +992,7 @@ export interface VoidScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
   name: 'Void';
 }
 
-export type WorkResolvers<ContextType = any, ParentType extends ResolversParentTypes['Work'] = ResolversParentTypes['Work']> = {
+export type WorkResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['Work'] = ResolversParentTypes['Work']> = {
   client?: Resolver<ResolversTypes['Client'], ParentType, ContextType>;
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
@@ -1006,7 +1006,7 @@ export type WorkResolvers<ContextType = any, ParentType extends ResolversParentT
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type WorkLocationResolvers<ContextType = any, ParentType extends ResolversParentTypes['WorkLocation'] = ResolversParentTypes['WorkLocation']> = {
+export type WorkLocationResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['WorkLocation'] = ResolversParentTypes['WorkLocation']> = {
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
@@ -1016,7 +1016,7 @@ export type WorkLocationResolvers<ContextType = any, ParentType extends Resolver
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type WorkerResolvers<ContextType = any, ParentType extends ResolversParentTypes['Worker'] = ResolversParentTypes['Worker']> = {
+export type WorkerResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['Worker'] = ResolversParentTypes['Worker']> = {
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   avatar?: Resolver<Maybe<ResolversTypes['URL']>, ParentType, ContextType>;
   bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -1038,7 +1038,7 @@ export type WorkerResolvers<ContextType = any, ParentType extends ResolversParen
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type WorkerLocationResolvers<ContextType = any, ParentType extends ResolversParentTypes['WorkerLocation'] = ResolversParentTypes['WorkerLocation']> = {
+export type WorkerLocationResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['WorkerLocation'] = ResolversParentTypes['WorkerLocation']> = {
   createdAt?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
   id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
   latitude?: Resolver<ResolversTypes['Float'], ParentType, ContextType>;
@@ -1048,13 +1048,13 @@ export type WorkerLocationResolvers<ContextType = any, ParentType extends Resolv
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type WorkerServiceResolvers<ContextType = any, ParentType extends ResolversParentTypes['WorkerService'] = ResolversParentTypes['WorkerService']> = {
+export type WorkerServiceResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['WorkerService'] = ResolversParentTypes['WorkerService']> = {
   service?: Resolver<ResolversTypes['Service'], ParentType, ContextType>;
   worker?: Resolver<ResolversTypes['Worker'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
-export type Resolvers<ContextType = any> = {
+export type Resolvers<ContextType = IProducedContext> = {
   AccountNumber?: GraphQLScalarType;
   BigInt?: GraphQLScalarType;
   Book?: BookResolvers<ContextType>;

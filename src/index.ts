@@ -13,6 +13,7 @@ import appCors from './config/cors.config';
 import getApolloServer from './graphql/index';
 import { prisma } from './graphql/context';
 import errorHandler from './middlewares/error.middleware';
+import auth from './middlewares/auth.middleware';
 
 config();
 
@@ -54,6 +55,9 @@ config();
 
   // cors
   app.use(appCors());
+
+  // global authentication
+  app.use(auth);
 
   // test prisma connection
   try {

@@ -25,7 +25,8 @@
     "generate:prisma": "prisma generate",
     "studio": "prisma studio",
     "seed": "prisma db seed",
-    "migrate": "prisma migrate"
+    "migrate": "prisma migrate",
+    "manage:admin": "ts-node scripts/manage-admin.ts"
   },
   "author": "OgaRepair Team",
   "license": "MIT",

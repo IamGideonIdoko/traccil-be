@@ -183,7 +183,7 @@ export type Book = {
 export type Client = {
   __typename?: 'Client';
   address?: Maybe<Scalars['String']>;
-  avatar?: Maybe<Scalars['String']>;
+  avatar?: Maybe<Scalars['URL']>;
   bio?: Maybe<Scalars['String']>;
   country?: Maybe<Scalars['String']>;
   dob?: Maybe<Scalars['DateTime']>;
@@ -220,6 +220,7 @@ export type Mutation = {
   __typename?: 'Mutation';
   addBook?: Maybe<Book>;
   addUser?: Maybe<User>;
+  registerClient?: Maybe<ReturnedRegisteredClient>;
   registerWorker?: Maybe<ReturnedRegisteredWorker>;
 };
 
@@ -234,6 +235,11 @@ export type MutationAddBookArgs = {
 export type MutationAddUserArgs = {
   age?: InputMaybe<Scalars['Int']>;
   name?: InputMaybe<Scalars['String']>;
+};
+
+
+export type MutationRegisterClientArgs = {
+  client: RegisterClientInput;
 };
 
 
@@ -259,6 +265,19 @@ export type QueryUserArgs = {
   id: Scalars['ID'];
 };
 
+export type RegisterClientInput = {
+  address?: InputMaybe<Scalars['String']>;
+  bio?: InputMaybe<Scalars['String']>;
+  country?: InputMaybe<Scalars['String']>;
+  dob?: InputMaybe<Scalars['DateTime']>;
+  email: Scalars['EmailAddress'];
+  gender?: InputMaybe<Gender>;
+  name: Scalars['String'];
+  password: Scalars['String'];
+  phone?: InputMaybe<Scalars['PhoneNumber']>;
+  repeat_password: Scalars['String'];
+};
+
 export type RegisterWorkerInput = {
   address?: InputMaybe<Scalars['String']>;
   bio?: InputMaybe<Scalars['String']>;
@@ -270,6 +289,24 @@ export type RegisterWorkerInput = {
   password: Scalars['String'];
   phone?: InputMaybe<Scalars['PhoneNumber']>;
   repeat_password: Scalars['String'];
+};
+
+export type RegisteredClient = {
+  __typename?: 'RegisteredClient';
+  address?: Maybe<Scalars['String']>;
+  avatar?: Maybe<Scalars['URL']>;
+  bio?: Maybe<Scalars['String']>;
+  country?: Maybe<Scalars['String']>;
+  dob?: Maybe<Scalars['DateTime']>;
+  email: Scalars['EmailAddress'];
+  emailVerified?: Maybe<Scalars['Boolean']>;
+  gender?: Maybe<Gender>;
+  id: Scalars['ID'];
+  joinedDate: Scalars['DateTime'];
+  name: Scalars['String'];
+  phone?: Maybe<Scalars['PhoneNumber']>;
+  phoneVerified?: Maybe<Scalars['Boolean']>;
+  verified?: Maybe<Scalars['Boolean']>;
 };
 
 export type RegisteredWorker = {
@@ -288,6 +325,13 @@ export type RegisteredWorker = {
   phone?: Maybe<Scalars['PhoneNumber']>;
   phoneVerified?: Maybe<Scalars['Boolean']>;
   verified?: Maybe<Scalars['Boolean']>;
+};
+
+export type ReturnedRegisteredClient = Token & {
+  __typename?: 'ReturnedRegisteredClient';
+  accessToken: Scalars['JWT'];
+  refreshToken: Scalars['JWT'];
+  worker: RegisteredClient;
 };
 
 export type ReturnedRegisteredWorker = Token & {
@@ -525,8 +569,11 @@ export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   RGB: ResolverTypeWrapper<Scalars['RGB']>;
   RGBA: ResolverTypeWrapper<Scalars['RGBA']>;
+  RegisterClientInput: RegisterClientInput;
   RegisterWorkerInput: RegisterWorkerInput;
+  RegisteredClient: ResolverTypeWrapper<RegisteredClient>;
   RegisteredWorker: ResolverTypeWrapper<RegisteredWorker>;
+  ReturnedRegisteredClient: ResolverTypeWrapper<ReturnedRegisteredClient>;
   ReturnedRegisteredWorker: ResolverTypeWrapper<ReturnedRegisteredWorker>;
   RoutingNumber: ResolverTypeWrapper<Scalars['RoutingNumber']>;
   SafeInt: ResolverTypeWrapper<Scalars['SafeInt']>;
@@ -537,7 +584,7 @@ export type ResolversTypes = {
   Time: ResolverTypeWrapper<Scalars['Time']>;
   TimeZone: ResolverTypeWrapper<Scalars['TimeZone']>;
   Timestamp: ResolverTypeWrapper<Scalars['Timestamp']>;
-  Token: ResolversTypes['ReturnedRegisteredWorker'];
+  Token: ResolversTypes['ReturnedRegisteredClient'] | ResolversTypes['ReturnedRegisteredWorker'];
   URL: ResolverTypeWrapper<Scalars['URL']>;
   USCurrency: ResolverTypeWrapper<Scalars['USCurrency']>;
   UUID: ResolverTypeWrapper<Scalars['UUID']>;
@@ -611,8 +658,11 @@ export type ResolversParentTypes = {
   Query: {};
   RGB: Scalars['RGB'];
   RGBA: Scalars['RGBA'];
+  RegisterClientInput: RegisterClientInput;
   RegisterWorkerInput: RegisterWorkerInput;
+  RegisteredClient: RegisteredClient;
   RegisteredWorker: RegisteredWorker;
+  ReturnedRegisteredClient: ReturnedRegisteredClient;
   ReturnedRegisteredWorker: ReturnedRegisteredWorker;
   RoutingNumber: Scalars['RoutingNumber'];
   SafeInt: Scalars['SafeInt'];
@@ -623,7 +673,7 @@ export type ResolversParentTypes = {
   Time: Scalars['Time'];
   TimeZone: Scalars['TimeZone'];
   Timestamp: Scalars['Timestamp'];
-  Token: ResolversParentTypes['ReturnedRegisteredWorker'];
+  Token: ResolversParentTypes['ReturnedRegisteredClient'] | ResolversParentTypes['ReturnedRegisteredWorker'];
   URL: Scalars['URL'];
   USCurrency: Scalars['USCurrency'];
   UUID: Scalars['UUID'];
@@ -661,7 +711,7 @@ export interface ByteScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
 
 export type ClientResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['Client'] = ResolversParentTypes['Client']> = {
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
-  avatar?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  avatar?: Resolver<Maybe<ResolversTypes['URL']>, ParentType, ContextType>;
   bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   dob?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
@@ -809,6 +859,7 @@ export interface MacScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes[
 export type MutationResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
   addBook?: Resolver<Maybe<ResolversTypes['Book']>, ParentType, ContextType, Partial<MutationAddBookArgs>>;
   addUser?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, Partial<MutationAddUserArgs>>;
+  registerClient?: Resolver<Maybe<ResolversTypes['ReturnedRegisteredClient']>, ParentType, ContextType, RequireFields<MutationRegisterClientArgs, 'client'>>;
   registerWorker?: Resolver<Maybe<ResolversTypes['ReturnedRegisteredWorker']>, ParentType, ContextType, RequireFields<MutationRegisterWorkerArgs, 'worker'>>;
 };
 
@@ -879,6 +930,24 @@ export interface RgbaScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes
   name: 'RGBA';
 }
 
+export type RegisteredClientResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['RegisteredClient'] = ResolversParentTypes['RegisteredClient']> = {
+  address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  avatar?: Resolver<Maybe<ResolversTypes['URL']>, ParentType, ContextType>;
+  bio?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  country?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  dob?: Resolver<Maybe<ResolversTypes['DateTime']>, ParentType, ContextType>;
+  email?: Resolver<ResolversTypes['EmailAddress'], ParentType, ContextType>;
+  emailVerified?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  gender?: Resolver<Maybe<ResolversTypes['Gender']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  joinedDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  phone?: Resolver<Maybe<ResolversTypes['PhoneNumber']>, ParentType, ContextType>;
+  phoneVerified?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  verified?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type RegisteredWorkerResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['RegisteredWorker'] = ResolversParentTypes['RegisteredWorker']> = {
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
   avatar?: Resolver<Maybe<ResolversTypes['URL']>, ParentType, ContextType>;
@@ -894,6 +963,13 @@ export type RegisteredWorkerResolvers<ContextType = IProducedContext, ParentType
   phone?: Resolver<Maybe<ResolversTypes['PhoneNumber']>, ParentType, ContextType>;
   phoneVerified?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   verified?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ReturnedRegisteredClientResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['ReturnedRegisteredClient'] = ResolversParentTypes['ReturnedRegisteredClient']> = {
+  accessToken?: Resolver<ResolversTypes['JWT'], ParentType, ContextType>;
+  refreshToken?: Resolver<ResolversTypes['JWT'], ParentType, ContextType>;
+  worker?: Resolver<ResolversTypes['RegisteredClient'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -951,7 +1027,7 @@ export interface TimestampScalarConfig extends GraphQLScalarTypeConfig<Resolvers
 }
 
 export type TokenResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['Token'] = ResolversParentTypes['Token']> = {
-  __resolveType: TypeResolveFn<'ReturnedRegisteredWorker', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'ReturnedRegisteredClient' | 'ReturnedRegisteredWorker', ParentType, ContextType>;
   accessToken?: Resolver<ResolversTypes['JWT'], ParentType, ContextType>;
   refreshToken?: Resolver<ResolversTypes['JWT'], ParentType, ContextType>;
 };
@@ -1107,7 +1183,9 @@ export type Resolvers<ContextType = IProducedContext> = {
   Query?: QueryResolvers<ContextType>;
   RGB?: GraphQLScalarType;
   RGBA?: GraphQLScalarType;
+  RegisteredClient?: RegisteredClientResolvers<ContextType>;
   RegisteredWorker?: RegisteredWorkerResolvers<ContextType>;
+  ReturnedRegisteredClient?: ReturnedRegisteredClientResolvers<ContextType>;
   ReturnedRegisteredWorker?: ReturnedRegisteredWorkerResolvers<ContextType>;
   RoutingNumber?: GraphQLScalarType;
   SafeInt?: GraphQLScalarType;

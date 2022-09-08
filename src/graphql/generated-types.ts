@@ -330,8 +330,8 @@ export type RegisteredWorker = {
 export type ReturnedRegisteredClient = Token & {
   __typename?: 'ReturnedRegisteredClient';
   accessToken: Scalars['JWT'];
+  client: RegisteredClient;
   refreshToken: Scalars['JWT'];
-  worker: RegisteredClient;
 };
 
 export type ReturnedRegisteredWorker = Token & {
@@ -968,8 +968,8 @@ export type RegisteredWorkerResolvers<ContextType = IProducedContext, ParentType
 
 export type ReturnedRegisteredClientResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['ReturnedRegisteredClient'] = ResolversParentTypes['ReturnedRegisteredClient']> = {
   accessToken?: Resolver<ResolversTypes['JWT'], ParentType, ContextType>;
+  client?: Resolver<ResolversTypes['RegisteredClient'], ParentType, ContextType>;
   refreshToken?: Resolver<ResolversTypes['JWT'], ParentType, ContextType>;
-  worker?: Resolver<ResolversTypes['RegisteredClient'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 

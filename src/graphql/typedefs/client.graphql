@@ -38,5 +38,5 @@ type RegisteredClient {
 type ReturnedRegisteredClient implements Token {
   accessToken: JWT!
   refreshToken: JWT!
-  worker: RegisteredClient!
+  client: RegisteredClient!
 }

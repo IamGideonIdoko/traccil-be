@@ -14,4 +14,7 @@ type Mutation {
 
   # Worker
   registerWorker(worker: RegisterWorkerInput!): ReturnedRegisteredWorker
+
+  # Client
+  registerClient(client: RegisterClientInput!): ReturnedRegisteredClient
 }

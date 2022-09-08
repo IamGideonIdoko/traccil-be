@@ -172,6 +172,15 @@ export type Scalars = {
   Void: void;
 };
 
+export type Admin = {
+  __typename?: 'Admin';
+  email: Scalars['String'];
+  id: Scalars['ID'];
+  joinedDate: Scalars['DateTime'];
+  name: Scalars['String'];
+  password: Scalars['String'];
+};
+
 export type Book = {
   __typename?: 'Book';
   genre?: Maybe<Scalars['String']>;
@@ -216,6 +225,11 @@ export enum Gender {
   Male = 'MALE'
 }
 
+export type LoginInput = {
+  email: Scalars['String'];
+  password: Scalars['String'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addBook?: Maybe<Book>;
@@ -251,6 +265,9 @@ export type Query = {
   __typename?: 'Query';
   book?: Maybe<Book>;
   books?: Maybe<Array<Maybe<Book>>>;
+  loginAdmin?: Maybe<ReturnedRegisteredAdmin>;
+  loginClient?: Maybe<ReturnedRegisteredClient>;
+  loginWorker?: Maybe<ReturnedRegisteredWorker>;
   user?: Maybe<User>;
   users?: Maybe<Array<Maybe<User>>>;
 };
@@ -258,6 +275,21 @@ export type Query = {
 
 export type QueryBookArgs = {
   id: Scalars['ID'];
+};
+
+
+export type QueryLoginAdminArgs = {
+  loginInput: LoginInput;
+};
+
+
+export type QueryLoginClientArgs = {
+  loginInput: LoginInput;
+};
+
+
+export type QueryLoginWorkerArgs = {
+  loginInput: LoginInput;
 };
 
 
@@ -289,6 +321,14 @@ export type RegisterWorkerInput = {
   password: Scalars['String'];
   phone?: InputMaybe<Scalars['PhoneNumber']>;
   repeat_password: Scalars['String'];
+};
+
+export type RegisteredAdmin = {
+  __typename?: 'RegisteredAdmin';
+  email?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  joinedDate: Scalars['DateTime'];
+  name: Scalars['String'];
 };
 
 export type RegisteredClient = {
@@ -325,6 +365,13 @@ export type RegisteredWorker = {
   phone?: Maybe<Scalars['PhoneNumber']>;
   phoneVerified?: Maybe<Scalars['Boolean']>;
   verified?: Maybe<Scalars['Boolean']>;
+};
+
+export type ReturnedRegisteredAdmin = Token & {
+  __typename?: 'ReturnedRegisteredAdmin';
+  accessToken: Scalars['JWT'];
+  admin: RegisteredAdmin;
+  refreshToken: Scalars['JWT'];
 };
 
 export type ReturnedRegisteredClient = Token & {
@@ -513,6 +560,7 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 /** Mapping between all available schema types and the resolvers types */
 export type ResolversTypes = {
   AccountNumber: ResolverTypeWrapper<Scalars['AccountNumber']>;
+  Admin: ResolverTypeWrapper<Admin>;
   BigInt: ResolverTypeWrapper<Scalars['BigInt']>;
   Book: ResolverTypeWrapper<BookModel>;
   Boolean: ResolverTypeWrapper<Scalars['Boolean']>;
@@ -549,6 +597,7 @@ export type ResolversTypes = {
   LocalEndTime: ResolverTypeWrapper<Scalars['LocalEndTime']>;
   LocalTime: ResolverTypeWrapper<Scalars['LocalTime']>;
   Locale: ResolverTypeWrapper<Scalars['Locale']>;
+  LoginInput: LoginInput;
   Long: ResolverTypeWrapper<Scalars['Long']>;
   Longitude: ResolverTypeWrapper<Scalars['Longitude']>;
   MAC: ResolverTypeWrapper<Scalars['MAC']>;
@@ -571,8 +620,10 @@ export type ResolversTypes = {
   RGBA: ResolverTypeWrapper<Scalars['RGBA']>;
   RegisterClientInput: RegisterClientInput;
   RegisterWorkerInput: RegisterWorkerInput;
+  RegisteredAdmin: ResolverTypeWrapper<RegisteredAdmin>;
   RegisteredClient: ResolverTypeWrapper<RegisteredClient>;
   RegisteredWorker: ResolverTypeWrapper<RegisteredWorker>;
+  ReturnedRegisteredAdmin: ResolverTypeWrapper<ReturnedRegisteredAdmin>;
   ReturnedRegisteredClient: ResolverTypeWrapper<ReturnedRegisteredClient>;
   ReturnedRegisteredWorker: ResolverTypeWrapper<ReturnedRegisteredWorker>;
   RoutingNumber: ResolverTypeWrapper<Scalars['RoutingNumber']>;
@@ -584,7 +635,7 @@ export type ResolversTypes = {
   Time: ResolverTypeWrapper<Scalars['Time']>;
   TimeZone: ResolverTypeWrapper<Scalars['TimeZone']>;
   Timestamp: ResolverTypeWrapper<Scalars['Timestamp']>;
-  Token: ResolversTypes['ReturnedRegisteredClient'] | ResolversTypes['ReturnedRegisteredWorker'];
+  Token: ResolversTypes['ReturnedRegisteredAdmin'] | ResolversTypes['ReturnedRegisteredClient'] | ResolversTypes['ReturnedRegisteredWorker'];
   URL: ResolverTypeWrapper<Scalars['URL']>;
   USCurrency: ResolverTypeWrapper<Scalars['USCurrency']>;
   UUID: ResolverTypeWrapper<Scalars['UUID']>;
@@ -603,6 +654,7 @@ export type ResolversTypes = {
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   AccountNumber: Scalars['AccountNumber'];
+  Admin: Admin;
   BigInt: Scalars['BigInt'];
   Book: BookModel;
   Boolean: Scalars['Boolean'];
@@ -638,6 +690,7 @@ export type ResolversParentTypes = {
   LocalEndTime: Scalars['LocalEndTime'];
   LocalTime: Scalars['LocalTime'];
   Locale: Scalars['Locale'];
+  LoginInput: LoginInput;
   Long: Scalars['Long'];
   Longitude: Scalars['Longitude'];
   MAC: Scalars['MAC'];
@@ -660,8 +713,10 @@ export type ResolversParentTypes = {
   RGBA: Scalars['RGBA'];
   RegisterClientInput: RegisterClientInput;
   RegisterWorkerInput: RegisterWorkerInput;
+  RegisteredAdmin: RegisteredAdmin;
   RegisteredClient: RegisteredClient;
   RegisteredWorker: RegisteredWorker;
+  ReturnedRegisteredAdmin: ReturnedRegisteredAdmin;
   ReturnedRegisteredClient: ReturnedRegisteredClient;
   ReturnedRegisteredWorker: ReturnedRegisteredWorker;
   RoutingNumber: Scalars['RoutingNumber'];
@@ -673,7 +728,7 @@ export type ResolversParentTypes = {
   Time: Scalars['Time'];
   TimeZone: Scalars['TimeZone'];
   Timestamp: Scalars['Timestamp'];
-  Token: ResolversParentTypes['ReturnedRegisteredClient'] | ResolversParentTypes['ReturnedRegisteredWorker'];
+  Token: ResolversParentTypes['ReturnedRegisteredAdmin'] | ResolversParentTypes['ReturnedRegisteredClient'] | ResolversParentTypes['ReturnedRegisteredWorker'];
   URL: Scalars['URL'];
   USCurrency: Scalars['USCurrency'];
   UUID: Scalars['UUID'];
@@ -692,6 +747,15 @@ export type ResolversParentTypes = {
 export interface AccountNumberScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['AccountNumber'], any> {
   name: 'AccountNumber';
 }
+
+export type AdminResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['Admin'] = ResolversParentTypes['Admin']> = {
+  email?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  joinedDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  password?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
 
 export interface BigIntScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['BigInt'], any> {
   name: 'BigInt';
@@ -918,6 +982,9 @@ export interface PostalCodeScalarConfig extends GraphQLScalarTypeConfig<Resolver
 export type QueryResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
   book?: Resolver<Maybe<ResolversTypes['Book']>, ParentType, ContextType, RequireFields<QueryBookArgs, 'id'>>;
   books?: Resolver<Maybe<Array<Maybe<ResolversTypes['Book']>>>, ParentType, ContextType>;
+  loginAdmin?: Resolver<Maybe<ResolversTypes['ReturnedRegisteredAdmin']>, ParentType, ContextType, RequireFields<QueryLoginAdminArgs, 'loginInput'>>;
+  loginClient?: Resolver<Maybe<ResolversTypes['ReturnedRegisteredClient']>, ParentType, ContextType, RequireFields<QueryLoginClientArgs, 'loginInput'>>;
+  loginWorker?: Resolver<Maybe<ResolversTypes['ReturnedRegisteredWorker']>, ParentType, ContextType, RequireFields<QueryLoginWorkerArgs, 'loginInput'>>;
   user?: Resolver<Maybe<ResolversTypes['User']>, ParentType, ContextType, RequireFields<QueryUserArgs, 'id'>>;
   users?: Resolver<Maybe<Array<Maybe<ResolversTypes['User']>>>, ParentType, ContextType>;
 };
@@ -929,6 +996,14 @@ export interface RgbScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes[
 export interface RgbaScalarConfig extends GraphQLScalarTypeConfig<ResolversTypes['RGBA'], any> {
   name: 'RGBA';
 }
+
+export type RegisteredAdminResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['RegisteredAdmin'] = ResolversParentTypes['RegisteredAdmin']> = {
+  email?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  joinedDate?: Resolver<ResolversTypes['DateTime'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
 
 export type RegisteredClientResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['RegisteredClient'] = ResolversParentTypes['RegisteredClient']> = {
   address?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
@@ -963,6 +1038,13 @@ export type RegisteredWorkerResolvers<ContextType = IProducedContext, ParentType
   phone?: Resolver<Maybe<ResolversTypes['PhoneNumber']>, ParentType, ContextType>;
   phoneVerified?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
   verified?: Resolver<Maybe<ResolversTypes['Boolean']>, ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
+export type ReturnedRegisteredAdminResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['ReturnedRegisteredAdmin'] = ResolversParentTypes['ReturnedRegisteredAdmin']> = {
+  accessToken?: Resolver<ResolversTypes['JWT'], ParentType, ContextType>;
+  admin?: Resolver<ResolversTypes['RegisteredAdmin'], ParentType, ContextType>;
+  refreshToken?: Resolver<ResolversTypes['JWT'], ParentType, ContextType>;
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
@@ -1027,7 +1109,7 @@ export interface TimestampScalarConfig extends GraphQLScalarTypeConfig<Resolvers
 }
 
 export type TokenResolvers<ContextType = IProducedContext, ParentType extends ResolversParentTypes['Token'] = ResolversParentTypes['Token']> = {
-  __resolveType: TypeResolveFn<'ReturnedRegisteredClient' | 'ReturnedRegisteredWorker', ParentType, ContextType>;
+  __resolveType: TypeResolveFn<'ReturnedRegisteredAdmin' | 'ReturnedRegisteredClient' | 'ReturnedRegisteredWorker', ParentType, ContextType>;
   accessToken?: Resolver<ResolversTypes['JWT'], ParentType, ContextType>;
   refreshToken?: Resolver<ResolversTypes['JWT'], ParentType, ContextType>;
 };
@@ -1132,6 +1214,7 @@ export type WorkerServiceResolvers<ContextType = IProducedContext, ParentType ex
 
 export type Resolvers<ContextType = IProducedContext> = {
   AccountNumber?: GraphQLScalarType;
+  Admin?: AdminResolvers<ContextType>;
   BigInt?: GraphQLScalarType;
   Book?: BookResolvers<ContextType>;
   Byte?: GraphQLScalarType;
@@ -1183,8 +1266,10 @@ export type Resolvers<ContextType = IProducedContext> = {
   Query?: QueryResolvers<ContextType>;
   RGB?: GraphQLScalarType;
   RGBA?: GraphQLScalarType;
+  RegisteredAdmin?: RegisteredAdminResolvers<ContextType>;
   RegisteredClient?: RegisteredClientResolvers<ContextType>;
   RegisteredWorker?: RegisteredWorkerResolvers<ContextType>;
+  ReturnedRegisteredAdmin?: ReturnedRegisteredAdminResolvers<ContextType>;
   ReturnedRegisteredClient?: ReturnedRegisteredClientResolvers<ContextType>;
   ReturnedRegisteredWorker?: ReturnedRegisteredWorkerResolvers<ContextType>;
   RoutingNumber?: GraphQLScalarType;

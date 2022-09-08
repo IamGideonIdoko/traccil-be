@@ -6,4 +6,13 @@ type Query {
   # Book
   book(id: ID!): Book
   books: [Book]
+
+  # Worker
+  loginWorker(loginInput: LoginInput!): ReturnedRegisteredWorker
+
+  # Client
+  loginClient(loginInput: LoginInput!): ReturnedRegisteredClient
+
+  # Admin
+  loginAdmin(loginInput: LoginInput!): ReturnedRegisteredAdmin
 }

@@ -10,10 +10,33 @@ type Client {
   country: String
   phone: PhoneNumber
   phoneVerified: Boolean
-  avatar: String
+  avatar: URL
   dob: DateTime
   bio: String
   verified: Boolean
   location: ClientLocation
   work: [Work!]!
+}
+
+type RegisteredClient {
+  id: ID!
+  name: String!
+  email: EmailAddress!
+  emailVerified: Boolean
+  gender: Gender
+  joinedDate: DateTime!
+  address: String
+  country: String
+  phone: PhoneNumber
+  phoneVerified: Boolean
+  avatar: URL
+  dob: DateTime
+  bio: String
+  verified: Boolean
+}
+
+type ReturnedRegisteredClient implements Token {
+  accessToken: JWT!
+  refreshToken: JWT!
+  client: RegisteredClient!
 }

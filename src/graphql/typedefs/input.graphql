@@ -10,3 +10,16 @@ input RegisterWorkerInput {
   dob: DateTime
   bio: String
 }
+
+input RegisterClientInput {
+  name: String!
+  email: EmailAddress!
+  password: String!
+  repeat_password: String!
+  gender: Gender
+  address: String
+  country: String
+  phone: PhoneNumber
+  dob: DateTime
+  bio: String
+}

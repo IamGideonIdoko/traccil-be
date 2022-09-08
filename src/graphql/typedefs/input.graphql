@@ -23,3 +23,8 @@ input RegisterClientInput {
   dob: DateTime
   bio: String
 }
+
+input LoginInput {
+  email: String!
+  password: String!
+}

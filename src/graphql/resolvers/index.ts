@@ -3,6 +3,7 @@ import { userQueries, userMutations, userFields } from './user';
 import { bookQueries, bookMutations, bookFields } from './book';
 import { workerQueries, workerMutations, workerFields } from './worker';
 import { clientQueries, clientMutations, clientFields } from './client';
+import { adminQueries, adminMutations, adminFields } from './admin';
 import { Resolvers } from '../generated-types';
 
 const resolvers: Resolvers = {
@@ -14,6 +15,7 @@ const resolvers: Resolvers = {
     ...bookQueries,
     ...workerQueries,
     ...clientQueries,
+    ...adminQueries,
   },
   /** All mutation resolvers go here */
   Mutation: {
@@ -21,6 +23,7 @@ const resolvers: Resolvers = {
     ...bookMutations,
     ...workerMutations,
     ...clientMutations,
+    ...adminMutations,
   },
   /** All field resolvers go in here */
   User: {
@@ -34,6 +37,9 @@ const resolvers: Resolvers = {
   },
   Client: {
     ...clientFields,
+  },
+  Admin: {
+    ...adminFields,
   },
 };
 

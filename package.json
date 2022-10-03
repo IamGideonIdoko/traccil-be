@@ -9,6 +9,8 @@
   "scripts": {
     "test": "jest",
     "test:coverage": "jest --coverage",
+    "test:watch": "jest -watch",
+    "test:ci": "jest --ci",
     "server:dev": "cross-env NODE_ENV=development nodemon",
     "server:test": "cross-env NODE_ENV=test nodemon",
     "server:prod": "cross-env NODE_ENV=production nodemon",
@@ -61,6 +63,8 @@
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
+    "@commitlint/cli": "^17.1.2",
+    "@commitlint/config-conventional": "^17.1.0",
     "@graphql-codegen/cli": "^2.11.6",
     "@graphql-codegen/typescript": "^2.7.3",
     "@graphql-codegen/typescript-resolvers": "^2.7.3",
@@ -101,7 +105,8 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint && yarn test"
+      "pre-commit": "yarn lint:check && yarn test",
+      "commit-msg": "commitlint --edit"
     }
   },
   "prisma": {

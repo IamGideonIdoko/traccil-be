@@ -31,6 +31,8 @@ This is the core backend service for OgaRepair.
     ```bash
     yarn install
     ```
+    
+    **NB:** Add the `--ignore-scripts` flag to ignore post-installation scripts.
 
 ### Working on this project
 
@@ -139,6 +141,10 @@ By default, the project is configured to connect to a MySQL database using [Pris
 ## Useful Tips
 
 - Install the Prisma, GraphQL, and ESLint extensions to help with syntax highlighting and more.
+
+## Useful References
+
+- [Commit lint reference rules](https://commitlint.js.org/#/reference-rules)
 
 ~ Enjoy 😊
 

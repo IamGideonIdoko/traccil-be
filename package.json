@@ -9,6 +9,8 @@
   "scripts": {
     "test": "jest",
     "test:coverage": "jest --coverage",
+    "test:watch": "jest -watch",
+    "test:ci": "jest --ci",
     "server:dev": "cross-env NODE_ENV=development nodemon",
     "server:test": "cross-env NODE_ENV=test nodemon",
     "server:prod": "cross-env NODE_ENV=production nodemon",
@@ -101,7 +103,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn lint && yarn test"
+      "pre-commit": "yarn lint:check && yarn test"
     }
   },
   "prisma": {

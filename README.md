@@ -1,4 +1,7 @@
 # OgaRepair Core  Backend
+
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+
 This is the core backend service for OgaRepair.
 
 **NB:** This project's dependencies are solely managed with [Yarn](https://yarnpkg.com/) so ensure you have both [Yarn](https://yarnpkg.com/getting-started/install) and Node.js installed. If you have [Node.js](https://nodejs.org/en/download) installed.
@@ -84,7 +87,11 @@ This is the core backend service for OgaRepair.
   ```bash
   yarn studio
   ```
-  
+
+- This repo is commitizen-friendly so commit your code with the below command:
+  ```bash
+  yarn commit
+  ```
 
 ## Databases
 

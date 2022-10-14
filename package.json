@@ -28,7 +28,8 @@
     "studio": "prisma studio",
     "seed": "prisma db seed",
     "migrate": "prisma migrate",
-    "manage:admin": "ts-node scripts/manage-admin.ts"
+    "manage:admin": "ts-node scripts/manage-admin.ts",
+    "commit": "cz"
   },
   "author": "OgaRepair Team",
   "license": "MIT",
@@ -83,6 +84,8 @@
     "@types/uuid": "^8.3.4",
     "@typescript-eslint/eslint-plugin": "^5.32.0",
     "@typescript-eslint/parser": "^5.32.0",
+    "commitizen": "^4.2.5",
+    "cz-conventional-changelog": "3.3.0",
     "eslint": "^8.21.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
@@ -111,5 +114,10 @@
   },
   "prisma": {
     "seed": "ts-node prisma/seed.ts"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }

@@ -106,3 +106,9 @@ dist
 # Prisma
 prisma/docs/
 prisma/joi/
+
+# production
+build/
+
+# vercel
+.vercel

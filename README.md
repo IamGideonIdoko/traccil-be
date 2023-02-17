@@ -1,7 +1,7 @@
 # Traccil Backend
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
-This is the core backend service for OgaRepair.
+This is the core backend service for Traccil.
 
 **NB:** This project's dependencies are solely managed with [Yarn](https://yarnpkg.com/) so ensure you have both [Yarn](https://yarnpkg.com/getting-started/install) and Node.js installed. If you have [Node.js](https://nodejs.org/en/download) installed.
 
@@ -25,7 +25,7 @@ This is the core backend service for OgaRepair.
 * Move into the project directory:
 
     ```bash
-    cd ogarepair-core-backend
+    cd traccil-be
     ```
 
 * Install the dependencies:
@@ -57,7 +57,7 @@ This is the core backend service for OgaRepair.
   ```diff
   - DB_CONNECTION_URL=mysql://USER:PASSWORD@HOST:PORT/DATABASE
   
-  + DB_CONNECTION_URL=mysql://root:@127.0.0.1:3306/ogarepair_core_backend_db
+  + DB_CONNECTION_URL=mysql://root:@127.0.0.1:3306/traccil_be_db
   ```
 
 * Run database migration:

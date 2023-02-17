@@ -1,5 +1,4 @@
-# OgaRepair Core  Backend
-
+# Traccil Backend
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 This is the core backend service for OgaRepair.
@@ -19,8 +18,8 @@ This is the core backend service for OgaRepair.
 * Clone this repository:
 
     ```bash
-    [HTTPS] - git clone https://github.com/OgaRepair/ogarepair-core-backend.git
-    [SSH] - git clone git@github.com:OgaRepair/ogarepair-core-backend.git
+    [HTTPS] - git clone https://github.com/IamGideonIdoko/traccil-be.git
+    [SSH] - git clone git@github.com:IamGideonIdoko/traccil-be.git
     ```
 
 * Move into the project directory:
